@@ -1,103 +1,125 @@
-import Image from "next/image";
+'use client';
+import CaseCard from './components/Cart';
+import Image from 'next/image';
+import Link from 'next/link';
+const caseCategories = [
+  {
+    name: '2D MAX CASE',
+    image: '/images/2dmax.jpg',
+    href: '/cases/2d-max',
+  },
+  {
+    name: '2D CASE',
+    image: '/images/2d.jpg',
+    href: '/cases/2d',
+  },
+  {
+    name: 'SOFT CASE',
+    image: '/images/soft.jpg',
+    href: '/cases/soft',
+  },
+  {
+    name: '3D CASE',
+    image: '/images/3d.jpg',
+    href: '/cases/3d',
+  },
 
+
+];
 export default function Home() {
-  return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm/6 text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-[family-name:var(--font-geist-mono)] font-semibold">
-              app/page.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
+  const designCollections = [
+    { name: 'ANIME DESIGN', href: '/design-collection?category=anime' },
+    { name: 'MARVEL/DC DESIGN', href: '/design-collection?category=marvel-dc' },
+    { name: 'CARS & BIKES DESIGN', href: '/design-collection?category=cars-bikes' },
+    { name: 'COUPLE DESIGN', href: '/design-collection?category=couple' },
+    { name: 'FOOTBALL DESIGN', href: '/design-collection?category=football' },
+    { name: 'TYPOGRAPHY DESIGN', href: '/design-collection?category=typography' },
+    { name: 'GAMING DESIGN', href: '/design-collection?category=gaming' },
+    { name: 'ISLAMIC DESIGN', href: '/design-collection?category=islamic' },
+    { name: 'LADIES DESIGN', href: '/design-collection?category=ladies' },
+    { name: 'K-POP DESIGN', href: '/design-collection?category=k-pop' },
+  ];
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+  return (
+    <main>
+      {/* Background Section */}
+      <section className="relative w-full min-h-screen overflow-hidden">
+  {/* Fullscreen Background Image */}
+  <img
+  src="/image/bgh.png"
+  alt="Background"
+  className="absolute inset-0 w-full h-full object-cover z-0"
+/>
+
+
+  {/* Optional: black background fallback behind transparent areas */}
+  <div className="absolute z-0"></div>
+
+  {/* Overlay Content */}
+  <div className="relative z-10 min-h-screen flex flex-col md:flex-row items-center justify-center md:justify-end px-4 md:px-8 lg:px-12 py-8">
+    <div className="w-full max-w-lg md:max-w-md lg:max-w-lg xl:max-w-xl space-y-3">
+      {/* Design Collection Box */}
+      <div className="bg-white/95 backdrop-blur rounded-xl shadow-2xl p-6">
+        <div className="mb-6">
+          <h2 className="text-2xl md:text-3xl font-bold text-center text-white mb-6 py-3 px-4 rounded-lg bg-[#3C1630] border-2 border-white/20 hover:shadow-[0_4px_10px_#8400FF]">
+            DESIGN COLLECTION
+          </h2>
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
+
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+          {designCollections.map((collection) => (
+            <Link
+              key={collection.href}
+              href={collection.href}
+              className="bg-[#3C1630] text-white text-sm md:text-base py-3 px-4 rounded-lg text-center hover:bg-[#4D1C3D] transition-colors duration-300 transform hover:scale-105"
+            >
+              {collection.name}
+            </Link>
+          ))}
+        </div>
+      </div>
+
+      {/* Customize Button */}
+      <div className="bg-white/95 backdrop-blur rounded-xl shadow-2xl">
+        <Link
+          href="/customization"
+          className="bg-[#3C1630] text-white text-lg md:text-xl h-[106px] w-full rounded-xl flex items-center justify-center font-semibold hover:bg-[#4D1C3D] transition-all duration-300 transform hover:scale-105 hover:shadow-xl"
         >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
+          Customise with your design
+        </Link>
+      </div>
     </div>
+  </div>
+</section>
+<section className="w-screen min-h-screen bg-white flex flex-wrap  justify-center items-center py-12">
+  <div className="w-[85%] flex flex-col items-center gap-8">
+    <h1 className="font-bold text-4xl text-center text-black">
+      FIND YOUR DESIRED CASE BY CATEGORY
+    </h1>
+
+    {/* Grid Wrapper */}
+    <div className="w-full flex flex-wrap gap-3.5 justify-center">
+
+    {caseCategories.map((item, index) => (
+          <CaseCard key={index} image={item.image} name={item.name} href={item.href} />
+        ))}
+    </div>
+  </div>
+</section>
+
+<section className="relative w-full">
+      <Image
+  src="/image/Group211.png"
+  alt="Background"
+  width={1920}
+  height={1080}
+  layout="responsive"
+  priority
+  className="w-full h-auto"
+/>
+
+        </section>
+
+    </main>
   );
 }
