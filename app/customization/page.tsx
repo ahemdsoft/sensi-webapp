@@ -5,7 +5,11 @@ import { Button } from "@/app/components/ui/button";
 import { Input } from "@/app/components/ui/input";
 import { Textarea } from "@/app/components/ui/textarea";
 import { UploadCloud } from "lucide-react";
+import CaseCard from "@/app/components/cart2";
 
+
+
+const ITEMS_PER_PAGE = 4;
 type BrandData = {
   [key: string]: string[];
 };
@@ -76,8 +80,80 @@ export default function Customization() {
     }
   };
 
+
+
+  
+  const caseCategories = [
+    {
+      name: 'ANIME DESIGN',
+      slug: 'anime',
+      image: '/images/design/anime.jpg',
+    },
+    {
+      name: 'MARVEL/DC DESIGN',
+      slug: 'marvel-dc',
+      image: '/images/design/marvel-dc.jpg',
+    },
+    {
+      name: 'CARS & BIKES DESIGN',
+      slug: 'cars-bikes',
+      image: '/images/design/cars-bikes.jpg',
+    },
+    {
+      name: 'COUPLE DESIGN',
+      slug: 'couple',
+      image: '/images/design/couple.jpg',
+    },
+    {
+      name: 'FOOTBALL DESIGN',
+      slug: 'football',
+      image: '/images/design/football.jpg',
+    },
+    {
+      name: 'TYPOGRAPHY DESIGN',
+      slug: 'typography',
+      image: '/images/design/typography.jpg',
+    },
+    {
+      name: 'GAMING DESIGN',
+      slug: 'gaming',
+      image: '/images/design/gaming.jpg',
+    },
+    {
+      name: 'ISLAMIC DESIGN',
+      slug: 'islamic',
+      image: '/images/design/islamic.jpg',
+    },
+    {
+      name: 'LADIES DESIGN',
+      slug: 'ladies',
+      image: '/images/design/ladies.jpg',
+    },
+    {
+      name: 'K-POP DESIGN',
+      slug: 'k-pop',
+      image: '/images/design/k-pop.jpg',
+    },
+  ];
+
+
+   const [page, setPage] = useState(0);
+  
+    const totalPages = Math.ceil(caseCategories.length / ITEMS_PER_PAGE);
+  
+    const handleNext = () => {
+      setPage((prev) => (prev + 1) % totalPages);
+    };
+  
+    const handlePrev = () => {
+      setPage((prev) => (prev - 1 + totalPages) % totalPages);
+    };
+  
+    const start = page * ITEMS_PER_PAGE;
+    const visibleItems = caseCategories.slice(start, start + ITEMS_PER_PAGE);
+
   return (
-    <div className="h-full w-full flex justify-center items-center">
+    <div className="h-full w-full flex flex-col justify-center items-center">
       <div className="md:h-[100%] md:w-[80%] w-full mt-5 mb-5 flex justify-center items-center ">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 p-6">
           <Card className="flex justify-center items-center h-96">
@@ -176,6 +252,38 @@ export default function Customization() {
           </div>
         </div>
       </div>
-    </div>
+       <div className='w-full h-full flex flex-col gap-12 mb-8 justify-evenly items-center'>
+          <h2 className="sm:text-3xl hover:shadow-[0px_4px_6px_#00D6EE40] text-white font-semibold md:w-[843px] md:h-[68px] bg-[#3C1630] flex justify-center items-center w-full top-[221.25px] rounded-[15.75px]">
+                MORE RElATED PRODUCTS
+              </h2>
+              <div className="relative w-full overflow-hidden">
+            <div className=" flex justify-center flex-wrap gap-10  transition-transform duration-500 ease-in-out">
+              {visibleItems.map((item, index) => (
+                <CaseCard
+                  key={index}
+                  image={item.image}
+                  name={item.name}
+                  href={`/desgine-collection/${item.slug}`}
+                />
+              ))}
+            </div>
+      
+            {/* Arrows */}
+            <button
+              onClick={handlePrev}
+              className="absolute left-2 top-1/2 -translate-y-1/2 bg-white rounded-full shadow p-2"
+            >
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"><path d="M15.293 3.293 6.586 12l8.707 8.707 1.414-1.414L9.414 12l7.293-7.293-1.414-1.414z"/></svg>
+            </button>
+            <button
+              onClick={handleNext}
+              className="absolute right-2 top-1/2 -translate-y-1/2 bg-white rounded-full shadow p-2"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"><path d="M7.293 4.707 14.586 12l-7.293 7.293 1.414 1.414L17.414 12 8.707 3.293 7.293 4.707z"/></svg>
+            </button>
+          </div>
+      
+    </div></div>
+  
   );
 }
