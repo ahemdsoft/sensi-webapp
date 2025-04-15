@@ -47,12 +47,12 @@ export default function Navbar() {
   };
 
   return (
-    <><div className='gap-3 flex flex-col'> <div className=''>
+    <><div className=' flex flex-col'> <div className=''>
       <div className="bg-[#4372C1] text-white text-center py-1.5">
         <p>ALL MODELS AVAILABLE 🔥 🎉</p>
       </div>
 
-      <nav className="bg-black text-white pt-2 relative z-20">
+      <nav className="bg-black text-white pt-2 pb-3 relative z-20">
         <div className="max-w-7xl mx-auto px-4 flex items-center justify-between h-16">
           <div className="flex items-center space-x-4">
             <button onClick={() => setMenuOpen(!menuOpen)} className="p-2 md:hidden">
@@ -109,7 +109,7 @@ export default function Navbar() {
           </div>
         </div></nav></div><div className=''><nav className='bg-black  sticky z-20'>
 
-        <div className="hidden md:flex justify-center font-sans font-extralight text-base space-x-6 py-4">
+        <div className="hidden md:flex justify-center font-sans font-extralight text-white text-base space-x-6 py-4">
           {navItems.map((item) => {
             if (item.name === 'PHONE CASES') {
               return (
@@ -123,7 +123,7 @@ export default function Navbar() {
                       <li><Link href="/phone-cases/2d" className="block px-4 py-2 hover:bg-gray-100">2D Case</Link></li>
                       <li><Link href="/phone-cases/2d-max" className="block px-4 py-2 hover:bg-gray-100">2D Max Case</Link></li>
                       <li><Link href="/phone-cases/soft" className="block px-4 py-2 hover:bg-gray-100">Soft Case</Link></li>
-                      <li><Link href="/phone-cases/3d" className="block px-4 py-2 hover:bg-gray-100">3D Case</Link></li>
+                      <li><Link href="/phone-cases/3d-hard" className="block px-4 py-2 hover:bg-gray-100">3D Case</Link></li>
                     </ul>
                   </div>
                 </div>

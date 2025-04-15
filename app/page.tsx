@@ -28,16 +28,16 @@ const caseCategories = [
 ];
 export default function Home() {
   const designCollections = [
-    { name: 'ANIME DESIGN', href: '/design-collection?category=anime' },
-    { name: 'MARVEL/DC DESIGN', href: '/design-collection?category=marvel-dc' },
-    { name: 'CARS & BIKES DESIGN', href: '/design-collection?category=cars-bikes' },
-    { name: 'COUPLE DESIGN', href: '/design-collection?category=couple' },
-    { name: 'FOOTBALL DESIGN', href: '/design-collection?category=football' },
-    { name: 'TYPOGRAPHY DESIGN', href: '/design-collection?category=typography' },
-    { name: 'GAMING DESIGN', href: '/design-collection?category=gaming' },
-    { name: 'ISLAMIC DESIGN', href: '/design-collection?category=islamic' },
-    { name: 'LADIES DESIGN', href: '/design-collection?category=ladies' },
-    { name: 'K-POP DESIGN', href: '/design-collection?category=k-pop' },
+    { name: 'ANIME DESIGN', slug: 'anime' },
+    { name: 'MARVEL/DC DESIGN', slug: 'marvel-dc' },
+    { name: 'CARS & BIKES DESIGN', slug: 'cars-bikes' },
+    { name: 'COUPLE DESIGN', slug: 'couple' },
+    { name: 'FOOTBALL DESIGN', slug: 'football' },
+    { name: 'TYPOGRAPHY DESIGN', slug: 'typography' },
+    { name: 'GAMING DESIGN', slug: 'gaming' },
+    { name: 'ISLAMIC DESIGN', slug: 'islamic' },
+    { name: 'LADIES DESIGN', slug: 'ladies' },
+    { name: 'K-POP DESIGN', slug:'k-pop' },
   ];
 
   return (
@@ -69,8 +69,8 @@ export default function Home() {
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
           {designCollections.map((collection) => (
             <Link
-              key={collection.href}
-              href={collection.href}
+              key={collection.slug}
+              href={`/desgine-collection/${collection.slug}`}
               className="bg-[#3C1630] text-white text-sm md:text-base py-3 px-4 rounded-lg text-center hover:bg-[#4D1C3D] transition-colors duration-300 transform hover:scale-105"
             >
               {collection.name}
@@ -98,7 +98,7 @@ export default function Home() {
     </h1>
 
     {/* Grid Wrapper */}
-    <div className="w-full flex flex-wrap gap-3.5 justify-center">
+    <div className="w-full flex flex-wrap gap-7 justify-center">
 
     {caseCategories.map((item, index) => (
           <CaseCard key={index} image={item.image} name={item.name} href={item.href} />

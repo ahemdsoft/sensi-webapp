@@ -6,10 +6,10 @@ import { FaFacebookF, FaInstagram, FaPhone } from 'react-icons/fa';
 
 const Footer = () => {
   const popularCategories = [
-    { name: '2D CASES', href: '/cases/2d' },
-    { name: '2D MAX CASES', href: '/cases/2d-max' },
-    { name: '3D HARD CASES', href: '/cases/3d-hard' },
-    { name: 'SOFT CASES', href: '/cases/soft' },
+    { name: '2D CASES', href: '/phone-cases/2d' },
+    { name: '2D MAX CASES', href: '/phone-cases/2d-max' },
+    { name: '3D HARD CASES', href: '/phone-cases/3d-hard' },
+    { name: 'SOFT CASES', href: '/phone-cases/soft' },
   ];
 
   const customerServices = [

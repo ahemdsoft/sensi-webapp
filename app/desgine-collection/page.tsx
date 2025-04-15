@@ -1,57 +1,87 @@
-export default function DesignCollection() {
+'use client';
+import { useParams, useSearchParams } from 'next/navigation';
+import CaseCardType2 from '@/app/components/cart2';
+
+export default function PhoneCaseTypePage() {
+  const params = useParams();
+  const id = params?.id; // this is your main category like "2d", "3d", etc.
+  const searchParams = useSearchParams();
+  const category = searchParams.get('category');
+
+  const caseCategories = [
+    {
+      name: 'ANIME DESIGN',
+      slug: 'anime',
+      image: '/images/design/anime.jpg',
+    },
+    {
+      name: 'MARVEL/DC DESIGN',
+      slug: 'marvel-dc',
+      image: '/images/design/marvel-dc.jpg',
+    },
+    {
+      name: 'CARS & BIKES DESIGN',
+      slug: 'cars-bikes',
+      image: '/images/design/cars-bikes.jpg',
+    },
+    {
+      name: 'COUPLE DESIGN',
+      slug: 'couple',
+      image: '/images/design/couple.jpg',
+    },
+    {
+      name: 'FOOTBALL DESIGN',
+      slug: 'football',
+      image: '/images/design/football.jpg',
+    },
+    {
+      name: 'TYPOGRAPHY DESIGN',
+      slug: 'typography',
+      image: '/images/design/typography.jpg',
+    },
+    {
+      name: 'GAMING DESIGN',
+      slug: 'gaming',
+      image: '/images/design/gaming.jpg',
+    },
+    {
+      name: 'ISLAMIC DESIGN',
+      slug: 'islamic',
+      image: '/images/design/islamic.jpg',
+    },
+    {
+      name: 'LADIES DESIGN',
+      slug: 'ladies',
+      image: '/images/design/ladies.jpg',
+    },
+    {
+      name: 'K-POP DESIGN',
+      slug: 'k-pop',
+      image: '/images/design/k-pop.jpg',
+    },
+  ];
+
   return (
-    <div className="min-h-screen py-6 sm:py-8 lg:py-12 relative mb-16 sm:mb-20">
-      {/* Main content area with flex layout */}
-      <div className="flex flex-col lg:flex-row max-w-7xl mx-auto px-3 sm:px-6 lg:px-8">
-        {/* Left side - Title and description */}
-        <div className="lg:w-1/2 lg:pr-8 mb-4 lg:mb-0">
-          <h1 className="text-2xl sm:text-3xl font-bold text-gray-900">Design Collection</h1>
-          <p className="mt-2 sm:mt-4 text-base sm:text-lg text-gray-600">
-            Explore our curated collection of unique and artistic designs.
-          </p>
-        </div>
+    <div className="p-4 flex flex-col items-center justify-center min-h-screen bg-[#f7edf7]">
+      <div className="w-[60%] flex flex-col gap-11 justify-center items-center mb-5 mt-5 h-[100%]">
+        <h1 className="text-6xl hover:shadow-[0px_4px_6px_#BF00FF78] font-bold md:w-[848px] md:h-[110] rounded-[15px] bg-[#3C1630] text-white w-full flex justify-center items-center">
+          {id} {category} Cases
+        </h1>
+        <h2 className="sm:text-4xl hover:shadow-[0px_4px_6px_#00D6EE40] text-white font-semibold md:w-[1143px] md:h-[68px] bg-[#3C1630] flex justify-center items-center w-full top-[221.25px] rounded-[15.75px]">
+          96% COLOUR ACCURACY, GRAPHENE METAL, RUBBER GRIP
+        </h2>
 
-        {/* Right side - Collection Box */}
-        <div className="lg:w-1/2 lg:pl-8">
-          <div className="bg-white rounded-lg shadow-lg p-3 sm:p-6">
-            <div className="grid grid-cols-2 gap-2 sm:gap-6">
-              {/* Collection Items - Add more as needed */}
-              <div className="bg-gray-50 rounded-lg p-2 sm:p-4 hover:shadow-md transition-shadow">
-                <div className="aspect-w-1 aspect-h-1 mb-2 sm:mb-4">
-                  <img
-                    src="/placeholder-design.jpg"
-                    alt="Design 1"
-                    className="object-cover rounded-lg w-full h-full"
-                  />
-                </div>
-                <h3 className="text-sm sm:text-lg font-semibold">Design 1</h3>
-                <p className="text-xs sm:text-base text-gray-600">Beautiful phone case design</p>
-              </div>
-
-              <div className="bg-gray-50 rounded-lg p-2 sm:p-4 hover:shadow-md transition-shadow">
-                <div className="aspect-w-1 aspect-h-1 mb-2 sm:mb-4">
-                  <img
-                    src="/placeholder-design.jpg"
-                    alt="Design 2"
-                    className="object-cover rounded-lg w-full h-full"
-                  />
-                </div>
-                <h3 className="text-sm sm:text-lg font-semibold">Design 2</h3>
-                <p className="text-xs sm:text-base text-gray-600">Elegant pattern design</p>
-              </div>
-
-              {/* Add more design items as needed */}
-            </div>
-
-            {/* Pagination or Load More button */}
-            <div className="mt-4 sm:mt-8 text-center">
-              <button className="bg-blue-600 text-white px-4 sm:px-6 py-1.5 sm:py-2 text-sm sm:text-base rounded-lg hover:bg-blue-700 transition-colors">
-                Load More Designs
-              </button>
-            </div>
-          </div>
+        <div className="flex flex-wrap justify-center gap-24">
+          {caseCategories.map((item, index) => (
+            <CaseCardType2
+              key={index}
+              image={item.image}
+              name={item.name}
+              href={`/desgine-collection/${item.slug}`} // dynamic link like /2d/anime
+            />
+          ))}
         </div>
       </div>
     </div>
   );
-} 
+}
