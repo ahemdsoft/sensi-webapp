@@ -17,7 +17,7 @@ export default function CaseCard3({
   discountPrice: string;
 }) {
   return (
-    <div className="w-[377px] h-[546px] bg-white rounded-[10.5px] flex flex-col justify-between shadow-md">
+    <div className="w-[337px] h-[500px] bg-white rounded-[10.5px] flex flex-col justify-between border-2 border-gray-200 shadow-2xl">
       {/* Case Image */}
       <div className="flex justify-center items-center p-4">
         <div className="relative w-[220px] h-[320px]">
