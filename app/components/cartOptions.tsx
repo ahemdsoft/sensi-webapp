@@ -15,6 +15,13 @@ interface CartItem {
 export default function CartOption() {
   const [cartOpen, setCartOpen] = useState(false);
   const { cartItems, removeFromCart, cartCount } = useCart();
+  
+  // Calculate total price
+  const totalPrice = cartItems.reduce((total, item) => {
+    // Convert price string to number, removing any currency symbols
+    const price = parseFloat(item.price.replace(/[^\d.]/g, ''));
+    return total + price;
+  }, 0);
 
   return (
     <>
@@ -52,36 +59,53 @@ export default function CartOption() {
               <p className="text-gray-500">Your cart is empty</p>
             </div>
           ) : (
-            <div className="space-y-4 flex-grow overflow-y-auto">
-              {cartItems.map((item) => (
-                <div key={item.id} className="flex flex-col p-2 border rounded">
-                  <div className="flex items-center justify-between">
-                    <div className="flex items-center space-x-2">
-                      <img src={item.image} alt={item.name} className="w-16 h-16 object-cover" />
-                      <div>
-                        <p className="font-medium">{item.name}</p>
-                        <p className="text-sm text-gray-600">{item.price}</p>
+            <>
+              <div className="space-y-4 flex-grow overflow-y-auto">
+                {cartItems.map((item) => (
+                  <div key={item.id} className="flex flex-col p-2 border rounded">
+                    <div className="flex items-center justify-between">
+                      <div className="flex items-center space-x-2">
+                        <img src={item.image} alt={item.name} className="w-16 h-16 object-cover" />
+                        <div>
+                          <p className="font-medium">{item.name}</p>
+                          <p className="text-sm text-gray-600">{item.price}</p>
+                        </div>
                       </div>
+                      <button
+                        onClick={() => removeFromCart(item.id)}
+                        className="text-red-500 hover:text-red-700"
+                      >
+                        Remove
+                      </button>
                     </div>
-                    <button
-                      onClick={() => removeFromCart(item.id)}
-                      className="text-red-500 hover:text-red-700"
-                    >
-                      Remove
-                    </button>
+                    <div className="mt-2 flex justify-end">
+                      <Link 
+                        href={`/buy?name=${encodeURIComponent(item.name)}&price=${encodeURIComponent(item.price)}&image=${encodeURIComponent(item.image)}`}
+                        className="bg-[#3C1630] text-white font-bold px-4 py-1 rounded-full shadow hover:shadow-[0_4px_10px_#BF00FFA3] transition duration-200 text-sm"
+                        onClick={() => setCartOpen(false)}
+                      >
+                        Buy Now
+                      </Link>
+                    </div>
                   </div>
-                  <div className="mt-2 flex justify-end">
-                    <Link 
-                      href={`/buy?name=${encodeURIComponent(item.name)}&price=${encodeURIComponent(item.price)}&image=${encodeURIComponent(item.image)}`}
-                      className="bg-[#3C1630] text-white font-bold px-4 py-1 rounded-full shadow hover:shadow-[0_4px_10px_#BF00FFA3] transition duration-200 text-sm"
-                      onClick={() => setCartOpen(false)}
-                    >
-                      Buy Now
-                    </Link>
-                  </div>
+                ))}
+              </div>
+              
+              <div className="mt-4 pt-4 border-t">
+                <div className="flex justify-between items-center mb-4">
+                  <span className="font-semibold">Total:</span>
+                  <span className="font-bold text-lg">${totalPrice.toFixed(2)}</span>
                 </div>
-              ))}
-            </div>
+                
+                <Link 
+                  href={`/CheckOut?items=${encodeURIComponent(JSON.stringify(cartItems))}`}
+                  className="w-full bg-[#3C1630] text-white font-bold py-2 rounded-full shadow hover:shadow-[0_4px_10px_#BF00FFA3] transition duration-200 text-center block"
+                  onClick={() => setCartOpen(false)}
+                >
+                  Buy All Items
+                </Link>
+              </div>
+            </>
           )}
         </div>
       </div>

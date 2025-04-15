@@ -2,15 +2,30 @@
 import { useSearchParams } from 'next/navigation';
 import Image from 'next/image';
 import { useState } from "react";
+import { useRouter } from 'next/navigation';
 
 export default function BuyNowPage() {
   const searchParams = useSearchParams();
+  const router = useRouter();
   const name = searchParams.get('name');
   const price = searchParams.get('price');
   const discountPrice = searchParams.get('discountPrice');
   const image = searchParams.get('image');
 
   const [quantity, setQuantity] = useState(1);
+
+  const handleBuyNow = () => {
+    // Create a query string with all the product details
+    const queryParams = new URLSearchParams({
+      name: name || '',
+      price: price || '',
+      image: image || '',
+      type: 'product'
+    });
+    
+    // Navigate to the CheckOut page with the product details
+    router.push(`/CheckOut?${queryParams.toString()}`);
+  };
 
   return (
     <div className="flex justify-center flex-col gap-8 mt-3 mb-3.5 items-center">
@@ -48,7 +63,12 @@ export default function BuyNowPage() {
                 />
                 <button onClick={() => setQuantity(quantity + 1)}>+</button>
               </div>
-              <button className="w-full bg-black text-white py-3 rounded-md">Buy Now</button>
+              <button 
+                onClick={handleBuyNow}
+                className="w-full bg-[#3C1630] text-white font-bold py-3 rounded-full shadow hover:shadow-[0_4px_10px_#BF00FFA3] transition duration-200"
+              >
+                Buy Now
+              </button>
             </div>
           </div>
         </div>
