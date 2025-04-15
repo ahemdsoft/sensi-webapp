@@ -2,6 +2,8 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { FiHeart, FiShoppingBag } from 'react-icons/fi';
+import { useParams } from 'next/navigation';
+import { useCart } from '../context/CartContext';
 
 export default function CaseCard3({
   image,
@@ -16,6 +18,22 @@ export default function CaseCard3({
   price: string;
   discountPrice: string;
 }) {
+  const params = useParams();
+  const type = params.type as string;
+  const { addToCart } = useCart();
+
+  const handleAddToCart = () => {
+    const cartItem = {
+      id: `${type}-${name}-${Date.now()}`,
+      name,
+      price: discountPrice,
+      image,
+      type
+    };
+    
+    addToCart(cartItem);
+  };
+
   return (
     <div className="w-[337px] h-[500px] bg-white rounded-[10.5px] flex flex-col justify-between border-2 border-gray-200 shadow-2xl">
       {/* Case Image */}
@@ -56,7 +74,10 @@ export default function CaseCard3({
         </Link>
 
         {/* Cart Icon */}
-        <FiShoppingBag className="text-black text-[20px] cursor-pointer" />
+        <FiShoppingBag 
+          className="text-black text-[20px] cursor-pointer cart-icon" 
+          onClick={handleAddToCart}
+        />
       </div>
     </div>
   );

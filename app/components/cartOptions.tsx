@@ -1,10 +1,20 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { useCart } from '../context/CartContext';
+import Link from 'next/link';
+
+interface CartItem {
+  id: string;
+  name: string;
+  price: string;
+  image: string;
+  type: string;
+}
 
 export default function CartOption() {
   const [cartOpen, setCartOpen] = useState(false);
-  const [cartItems, setCartItems] = useState([]);
+  const { cartItems, removeFromCart, cartCount } = useCart();
 
   return (
     <>
@@ -12,9 +22,9 @@ export default function CartOption() {
         <svg className="w-6 h-6" stroke="currentColor" fill="none" viewBox="0 0 24 24">
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
         </svg>
-        {cartItems.length > 0 && (
+        {cartCount > 0 && (
           <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">
-            {cartItems.length}
+            {cartCount}
           </span>
         )}
       </button>
@@ -44,7 +54,34 @@ export default function CartOption() {
             </div>
           ) : (
             <div className="space-y-4">
-              {/* Render cart items here */}
+              {cartItems.map((item) => (
+                <div key={item.id} className="flex flex-col p-2 border rounded">
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center space-x-2">
+                      <img src={item.image} alt={item.name} className="w-16 h-16 object-cover" />
+                      <div>
+                        <p className="font-medium">{item.name}</p>
+                        <p className="text-sm text-gray-600">{item.price}</p>
+                      </div>
+                    </div>
+                    <button
+                      onClick={() => removeFromCart(item.id)}
+                      className="text-red-500 hover:text-red-700"
+                    >
+                      Remove
+                    </button>
+                  </div>
+                  <div className="mt-2 flex justify-end">
+                    <Link 
+                      href={`/buy?name=${encodeURIComponent(item.name)}&price=${encodeURIComponent(item.price)}&image=${encodeURIComponent(item.image)}`}
+                      className="bg-[#3C1630] text-white font-bold px-4 py-1 rounded-full shadow hover:shadow-[0_4px_10px_#BF00FFA3] transition duration-200 text-sm"
+                      onClick={() => setCartOpen(false)}
+                    >
+                      Buy Now
+                    </Link>
+                  </div>
+                </div>
+              ))}
             </div>
           )}
         </div>

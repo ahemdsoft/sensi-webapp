@@ -92,17 +92,17 @@ export default function Navbar() {
                 </svg>
               </Link>
             </button>
-            <button className="p-2">
+            <button className="p-2 sm:block hidden"><Link href="/">
               <svg className="w-6 h-6" stroke="currentColor" fill="none" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
-              </svg>
+              </svg></Link>
             </button>
             <CartOption />
           </div>
         </div>
       </nav>
 
-      <nav className="bg-black sticky z-0">
+      <nav className="bg-black sticky z-10">
         <div className="hidden md:flex justify-center font-sans font-extralight text-white text-base space-x-6 py-4">
           {navItems.map((item) => {
             if (item.name === 'PHONE CASES') {
