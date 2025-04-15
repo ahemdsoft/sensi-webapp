@@ -5,6 +5,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import axios from 'axios';
 import { MagnifyingGlassIcon, ChevronDownIcon } from '@heroicons/react/24/outline';
+import CartOption from './cartOptions';
 
 const navItems = [
   { name: 'HOME', href: '/' },
@@ -18,10 +19,8 @@ const navItems = [
 
 export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
-  const [cartOpen, setCartOpen] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
-  const [cartItems, setCartItems] = useState([]);
   const [isSearching, setIsSearching] = useState(false);
 
   const handleSearch = async () => {
@@ -29,7 +28,7 @@ export default function Navbar() {
 
     try {
       setIsSearching(true);
-      const response = await axios.get('');
+      const response = await axios.get(''); // Add real endpoint
       console.log('Search response:', response.data);
     } catch (error) {
       console.error('Search error:', error);
@@ -47,7 +46,7 @@ export default function Navbar() {
   };
 
   return (
-    <><div className='w-screen flex flex-col'> <div className=''>
+    <div className="w-screen flex flex-col">
       <div className="bg-[#4372C1] text-white text-center py-1.5">
         <p>ALL MODELS AVAILABLE 🔥 🎉</p>
       </div>
@@ -87,28 +86,23 @@ export default function Navbar() {
 
           <div className="flex items-center space-x-3">
             <button className="p-2">
-              <svg className="w-6 h-6" stroke="currentColor" fill="none" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-              </svg>
+              <Link href="/auth">
+                <svg className="w-6 h-6" stroke="currentColor" fill="none" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                </svg>
+              </Link>
             </button>
             <button className="p-2">
               <svg className="w-6 h-6" stroke="currentColor" fill="none" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
               </svg>
             </button>
-            <button onClick={() => setCartOpen(true)} className="p-2 relative">
-              <svg className="w-6 h-6" stroke="currentColor" fill="none" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
-              </svg>
-              {cartItems.length > 0 && (
-                <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full h-5 w-5 flex items-center  justify-center">
-                  {cartItems.length}
-                </span>
-              )}
-            </button>
+            <CartOption />
           </div>
-        </div></nav></div><div className=''><nav className='bg-black  sticky z-20'>
+        </div>
+      </nav>
 
+      <nav className="bg-black sticky z-0">
         <div className="hidden md:flex justify-center font-sans font-extralight text-white text-base space-x-6 py-4">
           {navItems.map((item) => {
             if (item.name === 'PHONE CASES') {
@@ -118,7 +112,7 @@ export default function Navbar() {
                     {item.name}
                     <ChevronDownIcon className="w-4 h-4" />
                   </button>
-                  <div className="absolute bg-white text-black rounded shadow-lg mt-2 w-48 z-10 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-opacity duration-700">
+                  <div className="absolute bg-white text-black rounded shadow-lg mt-2 w-48 z-10 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-700">
                     <ul>
                       <li><Link href="/phone-cases/2d" className="block px-4 py-2 hover:bg-gray-100">2D Case</Link></li>
                       <li><Link href="/phone-cases/2d-max" className="block px-4 py-2 hover:bg-gray-100">2D Max Case</Link></li>
@@ -151,37 +145,7 @@ export default function Navbar() {
             ))}
           </div>
         )}
-
-        <div
-          className={`fixed top-0 right-0 w-1/4 h-full bg-white text-black shadow-xl transform transition-transform duration-300 z-50  ${
-            cartOpen ? 'translate-x-0' : 'translate-x-full'
-          }`}
-        >
-          <div className="p-4 ">
-            <div className="flex justify-between items-center mb-6 ">
-              <h2 className="text-xl font-bold">Shopping Cart</h2>
-              <button
-                onClick={() => setCartOpen(false)}
-                className="p-2 hover:bg-gray-100 rounded-full transition-colors"
-              >
-                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-                </svg>
-              </button>
-            </div>
-
-            {cartItems.length === 0 ? (
-              <div className="text-center py-8">
-                <p className="text-gray-500">Your cart is empty</p>
-              </div>
-            ) : (
-              <div className="space-y-4">
-                {/* Add your cart items here */}
-              </div>
-            )}
-          </div>
-        </div>
-      </nav></div></div>
-    </>
+      </nav>
+    </div>
   );
 }

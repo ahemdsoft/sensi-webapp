@@ -30,7 +30,7 @@ const caseCategories = [
     price: '$30.00',
     discountPrice: '$16.00',
   }, {
-    name: '3D CASE',
+    name: '54D CASE',
     image: '/images/3d.jpg',
     price: '$30.00',
     discountPrice: '$16.00',
@@ -105,9 +105,9 @@ const caseCategories = [
 
 export default function PhoneCaseTypePage() {
   const params = useParams();
-  const { type } = params; // dynamic type like "3d", "2d"
+  const { type } = params;
   const searchParams = useSearchParams();
-  const what = searchParams.get('what'); // dynamic category like "anime", "football"
+  const what = searchParams.get('what');
 
   return (
     <div className="p-4 flex flex-col items-center justify-center min-h-screen bg-[#ffffff]">
@@ -120,16 +120,19 @@ export default function PhoneCaseTypePage() {
         </h2>
 
         <div className="flex flex-wrap justify-center gap-24">
-          {caseCategories.map((item, index) => (
-            <CaseCard3
-              key={index}
-              image={item.image}
-              name={item.name}
-              price={item.price}
-              discountPrice={item.discountPrice}
-              href={'/phone-cases/${type}/${what}'} // dynamic href
-            />
-          ))}
+          {caseCategories.map((item, index) => {
+            const href = `/buy?name=${encodeURIComponent(item.name)}&price=${encodeURIComponent(item.price)}&discountPrice=${encodeURIComponent(item.discountPrice)}&image=${encodeURIComponent(item.image)}`;
+            return (
+              <CaseCard3
+                key={index}
+                image={item.image}
+                name={item.name}
+                price={item.price}
+                discountPrice={item.discountPrice}
+                href={href}
+              />
+            );
+          })}
         </div>
       </div>
     </div>

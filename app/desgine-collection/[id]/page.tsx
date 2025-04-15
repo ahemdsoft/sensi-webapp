@@ -107,7 +107,7 @@ export default function PhoneCaseTypePage() {
   const params = useParams();
   const { id } = params; // dynamic type like "3d", "2d"
   const searchParams = useSearchParams();
-  const what = searchParams.get('what'); // dynamic category like "anime", "football"
+  const what = searchParams.get('what'); // category like anime, football
 
   return (
     <div className="p-4 flex flex-col items-center justify-center min-h-screen bg-[#ffffff]">
@@ -120,16 +120,20 @@ export default function PhoneCaseTypePage() {
         </h2>
 
         <div className="flex flex-wrap justify-center gap-24">
-          {caseCategories.map((item, index) => (
-            <CaseCard3
-              key={index}
-              image={item.image}
-              name={item.name}
-              price={item.price}
-              discountPrice={item.discountPrice}
-              href={'/desgine-collection/${id}/${what}'} // dynamic href
-            />
-          ))}
+          {caseCategories.map((item, index) => {
+            const href = `/buy?name=${encodeURIComponent(item.name)}&price=${encodeURIComponent(item.price)}&discountPrice=${encodeURIComponent(item.discountPrice)}&image=${encodeURIComponent(item.image)}`;
+
+            return (
+              <CaseCard3
+                key={index}
+                image={item.image}
+                name={item.name}
+                price={item.price}
+                discountPrice={item.discountPrice}
+                href={href}
+              />
+            );
+          })}
         </div>
       </div>
     </div>
