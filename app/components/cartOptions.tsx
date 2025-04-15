@@ -29,13 +29,12 @@ export default function CartOption() {
         )}
       </button>
 
-      {/* Slide-out cart panel */}
       <div
-        className={`fixed top-0 right-0 w-1/4 h-full bg-white text-black shadow-xl transform transition-transform duration-300 z-50 ${
+        className={`fixed top-0 right-0 w-full md:w-1/4 h-full bg-white text-black shadow-xl transform transition-transform duration-300 z-[100] ${
           cartOpen ? 'translate-x-0' : 'translate-x-full'
         }`}
       >
-        <div className="p-4">
+        <div className="p-4 h-full flex flex-col">
           <div className="flex justify-between items-center mb-6">
             <h2 className="text-xl font-bold">Shopping Cart</h2>
             <button
@@ -53,7 +52,7 @@ export default function CartOption() {
               <p className="text-gray-500">Your cart is empty</p>
             </div>
           ) : (
-            <div className="space-y-4">
+            <div className="space-y-4 flex-grow overflow-y-auto">
               {cartItems.map((item) => (
                 <div key={item.id} className="flex flex-col p-2 border rounded">
                   <div className="flex items-center justify-between">

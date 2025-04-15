@@ -6,22 +6,22 @@ const caseCategories = [
   {
     name: '2D MAX CASE',
     image: '/images/2dmax.jpg',
-    href: '/cases/2d-max',
+    href: '/phone-cases/2d-max',
   },
   {
     name: '2D CASE',
     image: '/images/2d.jpg',
-    href: '/cases/2d',
+    href: '/phone-cases/2d',
   },
   {
     name: 'SOFT CASE',
     image: '/images/soft.jpg',
-    href: '/cases/soft',
+    href: '/phone-cases/soft',
   },
   {
     name: '3D CASE',
     image: '/images/3d.jpg',
-    href: '/cases/3d',
+    href: '/phone-cases/3d',
   },
 
 
@@ -56,7 +56,7 @@ export default function Home() {
   <div className="absolute z-0"></div>
 
   {/* Overlay Content */}
-  <div className="relative z-10 min-h-screen flex flex-col md:flex-row items-center justify-center md:justify-end px-4 md:px-8 lg:px-12 py-8">
+  <div className="relative z- min-h-screen flex flex-col md:flex-row items-center justify-center md:justify-end px-4 md:px-8 lg:px-12 py-8">
     <div className="w-full max-w-lg md:max-w-md lg:max-w-lg xl:max-w-xl space-y-3">
       {/* Design Collection Box */}
       <div className="bg-white/95 backdrop-blur rounded-xl shadow-2xl p-6">
@@ -66,7 +66,7 @@ export default function Home() {
           </h2>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+        <div className="grid grid-cols-1 sm:grid-cols-2 z-10 gap-3">
           {designCollections.map((collection) => (
             <Link
               key={collection.slug}

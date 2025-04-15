@@ -17,11 +17,20 @@ const navItems = [
   { name: 'CONTACT US', href: '/contact-us' },
 ];
 
+// Phone case submenu items
+const phoneCaseItems = [
+  { name: '2D Case', href: '/phone-cases/2d' },
+  { name: '2D Max Case', href: '/phone-cases/2d-max' },
+  { name: 'Soft Case', href: '/phone-cases/soft' },
+  { name: '3D Case', href: '/phone-cases/3d-hard' },
+];
+
 export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
   const [isSearching, setIsSearching] = useState(false);
+  const [phoneCasesOpen, setPhoneCasesOpen] = useState(false);
 
   const handleSearch = async () => {
     if (!searchQuery.trim()) return;
@@ -43,6 +52,10 @@ export default function Navbar() {
     if (e.key === 'Enter') {
       handleSearch();
     }
+  };
+
+  const togglePhoneCases = () => {
+    setPhoneCasesOpen(!phoneCasesOpen);
   };
 
   return (
@@ -102,7 +115,7 @@ export default function Navbar() {
         </div>
       </nav>
 
-      <nav className="bg-black sticky z-10">
+      <nav className="bg-black relative z-10">
         <div className="hidden md:flex justify-center font-sans font-extralight text-white text-base space-x-6 py-4">
           {navItems.map((item) => {
             if (item.name === 'PHONE CASES') {
@@ -114,10 +127,13 @@ export default function Navbar() {
                   </button>
                   <div className="absolute bg-white text-black rounded shadow-lg mt-2 w-48 z-10 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-700">
                     <ul>
-                      <li><Link href="/phone-cases/2d" className="block px-4 py-2 hover:bg-gray-100">2D Case</Link></li>
-                      <li><Link href="/phone-cases/2d-max" className="block px-4 py-2 hover:bg-gray-100">2D Max Case</Link></li>
-                      <li><Link href="/phone-cases/soft" className="block px-4 py-2 hover:bg-gray-100">Soft Case</Link></li>
-                      <li><Link href="/phone-cases/3d-hard" className="block px-4 py-2 hover:bg-gray-100">3D Case</Link></li>
+                      {phoneCaseItems.map((subItem) => (
+                        <li key={subItem.href}>
+                          <Link href={subItem.href} className="block px-4 py-2 hover:bg-gray-100">
+                            {subItem.name}
+                          </Link>
+                        </li>
+                      ))}
                     </ul>
                   </div>
                 </div>
@@ -137,12 +153,47 @@ export default function Navbar() {
         </div>
 
         {menuOpen && (
-          <div className="absolute top-16 left-0 w-full bg-black text-white flex flex-col items-start px-6 py-4 space-y-2 md:hidden">
-            {navItems.map((item) => (
-              <Link key={item.href} href={item.href} className="w-full py-2 border-b border-gray-700">
-                {item.name}
-              </Link>
-            ))}
+          <div className="absolute top-16 left-0 w-full bg-black text-white flex flex-col items-start px-6 py-4 space-y-2 md:hidden z-50">
+            {navItems.map((item) => {
+              if (item.name === 'PHONE CASES') {
+                return (
+                  <div key={item.href} className="w-full">
+                    <button 
+                      onClick={togglePhoneCases}
+                      className="w-full py-2 border-b border-gray-700 flex justify-between items-center"
+                    >
+                      {item.name}
+                      <ChevronDownIcon className={`w-4 h-4 transition-transform ${phoneCasesOpen ? 'rotate-180' : ''}`} />
+                    </button>
+                    {phoneCasesOpen && (
+                      <div className="pl-4 py-2 space-y-2">
+                        {phoneCaseItems.map((subItem) => (
+                          <Link 
+                            key={subItem.href} 
+                            href={subItem.href} 
+                            className="block py-2 border-b border-gray-700"
+                            onClick={() => setMenuOpen(false)}
+                          >
+                            {subItem.name}
+                          </Link>
+                        ))}
+                      </div>
+                    )}
+                  </div>
+                );
+              }
+              
+              return (
+                <Link 
+                  key={item.href} 
+                  href={item.href} 
+                  className="w-full py-2 border-b border-gray-700"
+                  onClick={() => setMenuOpen(false)}
+                >
+                  {item.name}
+                </Link>
+              );
+            })}
           </div>
         )}
       </nav>
