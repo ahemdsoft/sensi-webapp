@@ -46,14 +46,30 @@ export default function Customization() {
     }
   };
 
-  const handleSubmit = () => {
-    console.log({
-      brand: selectedBrand,
-      model: selectedModel,
-      image,
-      notes,
-      quantity
-    });
+  const handleSubmit = async () => {
+    if (!selectedBrand || !selectedModel || !image) {
+      console.warn("Please fill in all required fields.");
+      return;
+    }
+
+    const formData = new FormData();
+    formData.append("brand", selectedBrand);
+    formData.append("model", selectedModel);
+    formData.append("image", image);
+    formData.append("notes", notes);
+    formData.append("quantity", quantity.toString());
+
+    try {
+      const response = await fetch("", {
+        method: "POST",
+        body: formData
+      });
+
+      const data = await response.text(); // just dummy since no API
+      console.log("✅ Posted successfully!", data);
+    } catch (error) {
+      console.error("❌ Error submitting form:", error);
+    }
   };
 
   return (
