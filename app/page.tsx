@@ -41,7 +41,7 @@ export default function Home() {
   ];
 
   return (
-    <main>
+    <main className='w'>
       {/* Background Section */}
       <section className="relative w-full min-h-screen overflow-hidden">
   {/* Fullscreen Background Image */}

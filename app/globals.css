@@ -35,4 +35,8 @@ body {
     opacity: 1;
   }
 }
+/* globals.css or styles.css */
+html, body {
+  overflow-x: hidden;
+}
 

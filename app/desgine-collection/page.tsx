@@ -1,6 +1,6 @@
 'use client';
 import { useParams, useSearchParams } from 'next/navigation';
-import CaseCardType2 from '@/app/components/cart2';
+import CaseCard from '@/app/components/cart2';
 
 export default function PhoneCaseTypePage() {
   const params = useParams();
@@ -73,7 +73,7 @@ export default function PhoneCaseTypePage() {
 
         <div className="flex flex-wrap justify-center gap-24">
           {caseCategories.map((item, index) => (
-            <CaseCardType2
+            <CaseCard
               key={index}
               image={item.image}
               name={item.name}

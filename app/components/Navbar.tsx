@@ -47,7 +47,7 @@ export default function Navbar() {
   };
 
   return (
-    <><div className=' flex flex-col'> <div className=''>
+    <><div className='w-screen flex flex-col'> <div className=''>
       <div className="bg-[#4372C1] text-white text-center py-1.5">
         <p>ALL MODELS AVAILABLE 🔥 🎉</p>
       </div>

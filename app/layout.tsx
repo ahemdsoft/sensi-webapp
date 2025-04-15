@@ -19,7 +19,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        <div className="flex flex-warp flex-col min-h-screen">
+        <div className="flex w-full flex-warp flex-col min-h-screen">
           <Navbar />
           <main className="flex-grow">
             {children}

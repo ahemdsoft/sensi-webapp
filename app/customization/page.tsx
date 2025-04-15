@@ -12,6 +12,8 @@ type BrandData = {
 
 const price = [{ taka: 240 }];
 
+const caseTypes = ["2D", "2D-Max", "3D-Hard", "Soft"];
+
 const brandData: BrandData = {
   Apple: ["iPhone 13", "iPhone 14", "iPhone 15"],
   Samsung: ["Galaxy S21", "Galaxy S22"],
@@ -33,6 +35,7 @@ const brandData: BrandData = {
 export default function Customization() {
   const [selectedBrand, setSelectedBrand] = useState<string>("");
   const [selectedModel, setSelectedModel] = useState<string>("");
+  const [selectedType, setSelectedType] = useState<string>("");
   const [image, setImage] = useState<File | null>(null);
   const [imagePreview, setImagePreview] = useState<string | null>(null);
   const [notes, setNotes] = useState<string>("");
@@ -47,7 +50,7 @@ export default function Customization() {
   };
 
   const handleSubmit = async () => {
-    if (!selectedBrand || !selectedModel || !image) {
+    if (!selectedBrand || !selectedModel || !selectedType || !image) {
       console.warn("Please fill in all required fields.");
       return;
     }
@@ -55,6 +58,7 @@ export default function Customization() {
     const formData = new FormData();
     formData.append("brand", selectedBrand);
     formData.append("model", selectedModel);
+    formData.append("type", selectedType);
     formData.append("image", image);
     formData.append("notes", notes);
     formData.append("quantity", quantity.toString());
@@ -65,7 +69,7 @@ export default function Customization() {
         body: formData
       });
 
-      const data = await response.text(); // just dummy since no API
+      const data = await response.text();
       console.log("✅ Posted successfully!", data);
     } catch (error) {
       console.error("❌ Error submitting form:", error);
@@ -99,6 +103,7 @@ export default function Customization() {
             <h2 className="text-2xl font-bold">Customise Your Design</h2>
             <p className="text-gray-600">Tk. {price[0].taka}.00</p>
 
+            {/* Brand selection */}
             <div className="grid grid-cols-4 gap-2">
               {Object.keys(brandData).map((brand) => (
                 <Button
@@ -118,6 +123,7 @@ export default function Customization() {
               ))}
             </div>
 
+            {/* Model selection */}
             <select
               className="w-full border border-gray-300 rounded-md p-2"
               value={selectedModel}
@@ -131,6 +137,23 @@ export default function Customization() {
                   </option>
                 ))}
             </select>
+
+            {/* Case type selection */}
+            <div className="grid grid-cols-4 gap-2">
+              {caseTypes.map((type) => (
+                <Button
+                  key={type}
+                  onClick={() => setSelectedType(type)}
+                  className={`transition-colors duration-200 ${
+                    selectedType === type
+                      ? "bg-green-600 text-white hover:bg-green-700"
+                      : "bg-white text-black border hover:bg-gray-100"
+                  }`}
+                >
+                  {type}
+                </Button>
+              ))}
+            </div>
 
             <Input type="file" onChange={handleImageUpload} />
 
@@ -148,7 +171,7 @@ export default function Customization() {
 
             <div className="flex gap-2">
               <Button variant="outline">Add To Cart</Button>
-              <Button onClick={handleSubmit}>Buy Now</Button>
+              <Button type='submit' onClick={handleSubmit}>Buy Now</Button>
             </div>
           </div>
         </div>
