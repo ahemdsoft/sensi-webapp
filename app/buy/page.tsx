@@ -27,7 +27,7 @@ export default function BuyNowPage() {
     router.push(`/CheckOut?${queryParams.toString()}`);
   };
 
-  return (
+  return (<div className='w-full h-full flex flex-col gap-12 mb-8 justify-evenly items-center'>
     <div className="flex justify-center flex-col gap-8 mt-3 mb-3.5 items-center">
       <div className="container w-[60%] mx-auto px-4 py-8">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
@@ -73,6 +73,10 @@ export default function BuyNowPage() {
           </div>
         </div>
       </div>
+      
+    </div>
+    
+    
     </div>
   );
 }

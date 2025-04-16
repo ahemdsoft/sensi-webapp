@@ -83,58 +83,58 @@ export default function Customization() {
 
 
   
-  const caseCategories = [
-    {
-      name: 'ANIME DESIGN',
-      slug: 'anime',
-      image: '/images/design/anime.jpg',
-    },
-    {
-      name: 'MARVEL/DC DESIGN',
-      slug: 'marvel-dc',
-      image: '/images/design/marvel-dc.jpg',
-    },
-    {
-      name: 'CARS & BIKES DESIGN',
-      slug: 'cars-bikes',
-      image: '/images/design/cars-bikes.jpg',
-    },
-    {
-      name: 'COUPLE DESIGN',
-      slug: 'couple',
-      image: '/images/design/couple.jpg',
-    },
-    {
-      name: 'FOOTBALL DESIGN',
-      slug: 'football',
-      image: '/images/design/football.jpg',
-    },
-    {
-      name: 'TYPOGRAPHY DESIGN',
-      slug: 'typography',
-      image: '/images/design/typography.jpg',
-    },
-    {
-      name: 'GAMING DESIGN',
-      slug: 'gaming',
-      image: '/images/design/gaming.jpg',
-    },
-    {
-      name: 'ISLAMIC DESIGN',
-      slug: 'islamic',
-      image: '/images/design/islamic.jpg',
-    },
-    {
-      name: 'LADIES DESIGN',
-      slug: 'ladies',
-      image: '/images/design/ladies.jpg',
-    },
-    {
-      name: 'K-POP DESIGN',
-      slug: 'k-pop',
-      image: '/images/design/k-pop.jpg',
-    },
-  ];
+    const caseCategories = [
+      {
+        name: 'ANIME DESIGN',
+        slug: 'anime',
+        image: '/images/design/anime.jpg',
+      },
+      {
+        name: 'MARVEL/DC DESIGN',
+        slug: 'marvel-dc',
+        image: '/images/design/marvel-dc.jpg',
+      },
+      {
+        name: 'CARS & BIKES DESIGN',
+        slug: 'cars-bikes',
+        image: '/images/design/cars-bikes.jpg',
+      },
+      {
+        name: 'COUPLE DESIGN',
+        slug: 'couple',
+        image: '/images/design/couple.jpg',
+      },
+      {
+        name: 'FOOTBALL DESIGN',
+        slug: 'football',
+        image: '/images/design/football.jpg',
+      },
+      {
+        name: 'TYPOGRAPHY DESIGN',
+        slug: 'typography',
+        image: '/images/design/typography.jpg',
+      },
+      {
+        name: 'GAMING DESIGN',
+        slug: 'gaming',
+        image: '/images/design/gaming.jpg',
+      },
+      {
+        name: 'ISLAMIC DESIGN',
+        slug: 'islamic',
+        image: '/images/design/islamic.jpg',
+      },
+      {
+        name: 'LADIES DESIGN',
+        slug: 'ladies',
+        image: '/images/design/ladies.jpg',
+      },
+      {
+        name: 'K-POP DESIGN',
+        slug: 'k-pop',
+        image: '/images/design/k-pop.jpg',
+      },
+    ];
 
 
    const [page, setPage] = useState(0);
