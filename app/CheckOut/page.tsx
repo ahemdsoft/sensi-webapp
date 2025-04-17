@@ -9,6 +9,11 @@ interface CartItem {
   price: string;
   image: string;
   type: string;
+  brand?: string;
+  model?: string;
+  caseType?: string;
+  notes?: string;
+  quantity?: number;
 }
 
 interface DeliveryOption {
@@ -57,6 +62,26 @@ export default function CheckOut() {
         console.error('Error parsing cart items:', error);
       }
     } 
+    // Check if we have a custom item from the customization page
+    else if (searchParams.get('type') === 'custom') {
+      const customItem = {
+        id: Date.now().toString(),
+        name: searchParams.get('name') || '',
+        price: searchParams.get('price') || '',
+        image: searchParams.get('image') || '',
+        type: searchParams.get('type') || '',
+        brand: searchParams.get('brand') || '',
+        model: searchParams.get('model') || '',
+        caseType: searchParams.get('caseType') || '',
+        notes: searchParams.get('notes') || '',
+        quantity: parseInt(searchParams.get('quantity') || '1', 10)
+      };
+      setItems([customItem]);
+      
+      // Calculate subtotal price for custom item
+      const price = parseFloat(customItem.price.replace(/[^\d.]/g, ''));
+      setSubtotal(price * customItem.quantity);
+    }
     // Check if we have a single item (Buy Now)
     else if (searchParams.get('name')) {
       const singleItem = {
@@ -264,7 +289,16 @@ export default function CheckOut() {
                       </div>
                       <div className="flex-1">
                         <h3 className="font-medium">{item.name}</h3>
-                        <p className="text-gray-600">{item.price}</p>
+                        <p className="text-gray-600">{item.price} BDT</p>
+                        {item.type === 'custom' && (
+                          <div className="text-sm text-gray-500 mt-1">
+                            <p>Brand: {item.brand}</p>
+                            <p>Model: {item.model}</p>
+                            <p>Case Type: {item.caseType}</p>
+                            {item.notes && <p>Notes: {item.notes}</p>}
+                            <p>Quantity: {item.quantity}</p>
+                          </div>
+                        )}
                       </div>
                     </div>
                   ))}

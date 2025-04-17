@@ -6,8 +6,7 @@ import { Input } from "@/app/components/ui/input";
 import { Textarea } from "@/app/components/ui/textarea";
 import { UploadCloud } from "lucide-react";
 import CaseCard from "@/app/components/cart2";
-
-
+import { useRouter } from "next/navigation";
 
 const ITEMS_PER_PAGE = 4;
 type BrandData = {
@@ -37,6 +36,7 @@ const brandData: BrandData = {
 };
 
 export default function Customization() {
+  const router = useRouter();
   const [selectedBrand, setSelectedBrand] = useState<string>("");
   const [selectedModel, setSelectedModel] = useState<string>("");
   const [selectedType, setSelectedType] = useState<string>("");
@@ -59,98 +59,102 @@ export default function Customization() {
       return;
     }
 
-    const formData = new FormData();
-    formData.append("brand", selectedBrand);
-    formData.append("model", selectedModel);
-    formData.append("type", selectedType);
-    formData.append("image", image);
-    formData.append("notes", notes);
-    formData.append("quantity", quantity.toString());
+    // Create a custom item for the checkout page
+    const customItem = {
+      id: Date.now().toString(),
+      name: `Custom ${selectedType} Case for ${selectedBrand} ${selectedModel}`,
+      price: price[0].taka.toString(),
+      image: imagePreview || '/images/placeholder.jpg',
+      type: 'custom',
+      brand: selectedBrand,
+      model: selectedModel,
+      caseType: selectedType,
+      notes: notes,
+      quantity: quantity
+    };
 
-    try {
-      const response = await fetch("", {
-        method: "POST",
-        body: formData
-      });
+    // Navigate to checkout page with the custom item
+    const queryParams = new URLSearchParams();
+    queryParams.append('name', customItem.name);
+    queryParams.append('price', customItem.price);
+    queryParams.append('image', customItem.image);
+    queryParams.append('type', customItem.type);
+    queryParams.append('brand', customItem.brand);
+    queryParams.append('model', customItem.model);
+    queryParams.append('caseType', customItem.caseType);
+    queryParams.append('notes', customItem.notes);
+    queryParams.append('quantity', customItem.quantity.toString());
 
-      const data = await response.text();
-      console.log("✅ Posted successfully!", data);
-    } catch (error) {
-      console.error("❌ Error submitting form:", error);
-    }
+    router.push(`/CheckOut?${queryParams.toString()}`);
   };
 
+  const caseCategories = [
+    {
+      name: 'ANIME DESIGN',
+      slug: 'anime',
+      image: '/images/design/anime.jpg',
+    },
+    {
+      name: 'MARVEL/DC DESIGN',
+      slug: 'marvel-dc',
+      image: '/images/design/marvel-dc.jpg',
+    },
+    {
+      name: 'CARS & BIKES DESIGN',
+      slug: 'cars-bikes',
+      image: '/images/design/cars-bikes.jpg',
+    },
+    {
+      name: 'COUPLE DESIGN',
+      slug: 'couple',
+      image: '/images/design/couple.jpg',
+    },
+    {
+      name: 'FOOTBALL DESIGN',
+      slug: 'football',
+      image: '/images/design/football.jpg',
+    },
+    {
+      name: 'TYPOGRAPHY DESIGN',
+      slug: 'typography',
+      image: '/images/design/typography.jpg',
+    },
+    {
+      name: 'GAMING DESIGN',
+      slug: 'gaming',
+      image: '/images/design/gaming.jpg',
+    },
+    {
+      name: 'ISLAMIC DESIGN',
+      slug: 'islamic',
+      image: '/images/design/islamic.jpg',
+    },
+    {
+      name: 'LADIES DESIGN',
+      slug: 'ladies',
+      image: '/images/design/ladies.jpg',
+    },
+    {
+      name: 'K-POP DESIGN',
+      slug: 'k-pop',
+      image: '/images/design/k-pop.jpg',
+    },
+  ];
 
-
+  const [page, setPage] = useState(0);
   
-    const caseCategories = [
-      {
-        name: 'ANIME DESIGN',
-        slug: 'anime',
-        image: '/images/design/anime.jpg',
-      },
-      {
-        name: 'MARVEL/DC DESIGN',
-        slug: 'marvel-dc',
-        image: '/images/design/marvel-dc.jpg',
-      },
-      {
-        name: 'CARS & BIKES DESIGN',
-        slug: 'cars-bikes',
-        image: '/images/design/cars-bikes.jpg',
-      },
-      {
-        name: 'COUPLE DESIGN',
-        slug: 'couple',
-        image: '/images/design/couple.jpg',
-      },
-      {
-        name: 'FOOTBALL DESIGN',
-        slug: 'football',
-        image: '/images/design/football.jpg',
-      },
-      {
-        name: 'TYPOGRAPHY DESIGN',
-        slug: 'typography',
-        image: '/images/design/typography.jpg',
-      },
-      {
-        name: 'GAMING DESIGN',
-        slug: 'gaming',
-        image: '/images/design/gaming.jpg',
-      },
-      {
-        name: 'ISLAMIC DESIGN',
-        slug: 'islamic',
-        image: '/images/design/islamic.jpg',
-      },
-      {
-        name: 'LADIES DESIGN',
-        slug: 'ladies',
-        image: '/images/design/ladies.jpg',
-      },
-      {
-        name: 'K-POP DESIGN',
-        slug: 'k-pop',
-        image: '/images/design/k-pop.jpg',
-      },
-    ];
-
-
-   const [page, setPage] = useState(0);
+  const totalPages = Math.ceil(caseCategories.length / ITEMS_PER_PAGE);
   
-    const totalPages = Math.ceil(caseCategories.length / ITEMS_PER_PAGE);
+  const handleNext = () => {
+    setPage((prev) => (prev + 1) % totalPages);
+  };
   
-    const handleNext = () => {
-      setPage((prev) => (prev + 1) % totalPages);
-    };
+  const handlePrev = () => {
+    setPage((prev) => (prev - 1 + totalPages) % totalPages);
+  };
   
-    const handlePrev = () => {
-      setPage((prev) => (prev - 1 + totalPages) % totalPages);
-    };
-  
-    const start = page * ITEMS_PER_PAGE;
-    const visibleItems = caseCategories.slice(start, start + ITEMS_PER_PAGE);
+  const start = page * ITEMS_PER_PAGE;
+  const visibleItems = caseCategories.slice(start, start + ITEMS_PER_PAGE);
 
   return (
     <div className="h-full w-full flex flex-col justify-center items-center">

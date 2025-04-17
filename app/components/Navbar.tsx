@@ -115,8 +115,8 @@ export default function Navbar() {
         </div>
       </nav>
 
-      <nav className="bg-black relative z-10">
-        <div className="hidden md:flex justify-center font-sans font-extralight text-white text-base space-x-6 py-4">
+      <nav className="bg-black relative  z-10">
+        <div className="hidden md:flex justify-center font-sans  font-extralight text-white text-base space-x-6 py-4">
           {navItems.map((item) => {
             if (item.name === 'PHONE CASES') {
               return (
