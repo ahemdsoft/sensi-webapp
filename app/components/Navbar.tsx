@@ -29,20 +29,17 @@ export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
-  const [isSearching, setIsSearching] = useState(false);
   const [phoneCasesOpen, setPhoneCasesOpen] = useState(false);
 
   const handleSearch = async () => {
     if (!searchQuery.trim()) return;
 
     try {
-      setIsSearching(true);
       const response = await axios.get(''); // Add real endpoint
       console.log('Search response:', response.data);
     } catch (error) {
       console.error('Search error:', error);
     } finally {
-      setIsSearching(false);
       setSearchQuery('');
       setSearchOpen(false);
     }

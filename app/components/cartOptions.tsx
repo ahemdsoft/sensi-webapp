@@ -1,16 +1,9 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { useCart } from '../context/CartContext';
 import Link from 'next/link';
-
-interface CartItem {
-  id: string;
-  name: string;
-  price: string;
-  image: string;
-  type: string;
-}
+import Image from 'next/image';
 
 export default function CartOption() {
   const [cartOpen, setCartOpen] = useState(false);
@@ -65,7 +58,13 @@ export default function CartOption() {
                   <div key={item.id} className="flex flex-col p-2 border rounded">
                     <div className="flex items-center justify-between">
                       <div className="flex items-center space-x-2">
-                        <img src={item.image} alt={item.name} className="w-16 h-16 object-cover" />
+                        <Image 
+                          src={item.image} 
+                          alt={item.name} 
+                          width={50} 
+                          height={50} 
+                          className="w-12 h-12 object-cover rounded"
+                        />
                         <div>
                           <p className="font-medium">{item.name}</p>
                           <p className="text-sm text-gray-600">{item.price}</p>

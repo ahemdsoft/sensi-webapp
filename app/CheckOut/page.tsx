@@ -398,7 +398,7 @@ export default function CheckOut() {
             
             <div className="text-center">
               <p className="text-sm text-gray-500 mb-4">
-                Thank you for your order! We'll send you a confirmation email shortly.
+                Thank you for your order! We&apos;ll get back to you soon.
               </p>
               <button
                 onClick={closeSuccessPopup}
