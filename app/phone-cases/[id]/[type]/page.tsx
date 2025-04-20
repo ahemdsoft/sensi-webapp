@@ -4,105 +4,48 @@ import CaseCard3 from '@/app/components/cart3';
 import { useEffect } from 'react';
 
 const caseCategories = [
-  {
+  {id:'001',
     name: '3D CASE',
     image: '/images/3d.jpg',
     price: '$20.00',
     discountPrice: '$15.00',
   },
-  {
+  {id:'002',
     name: '3D CASE',
     image: '/images/3d.jpg',
     price: '$30.00',
     discountPrice: '$16.00',
-  }, {
+  }, {id:'003',
     name: '3D CASE',
     image: '/images/3d.jpg',
     price: '$30.00',
     discountPrice: '$16.00',
-  }, {
+  }, {id:'001',
     name: '3D CASE',
     image: '/images/3d.jpg',
     price: '$30.00',
     discountPrice: '$16.00',
-  }, {
+  }, {id:'001',
     name: '3D CASE',
     image: '/images/3d.jpg',
     price: '$30.00',
     discountPrice: '$16.00',
-  }, {
+  }, {id:'001',
     name: '54D CASE',
     image: '/images/3d.jpg',
     price: '$30.00',
     discountPrice: '$16.00',
-  }, {
+  }, {id:'001',
     name: '3D CASE',
     image: '/images/3d.jpg',
     price: '$30.00',
     discountPrice: '$16.00',
-  }, {
+  }, {id:'001',
     name: '3D CASE',
     image: '/images/3d.jpg',
     price: '$30.00',
     discountPrice: '$16.00',
-  }, {
-    name: '3D CASE',
-    image: '/images/3d.jpg',
-    price: '$30.00',
-    discountPrice: '$16.00',
-  }, {
-    name: '3D CASE',
-    image: '/images/3d.jpg',
-    price: '$30.00',
-    discountPrice: '$16.00',
-  }, {
-    name: '3D CASE',
-    image: '/images/3d.jpg',
-    price: '$30.00',
-    discountPrice: '$16.00',
-  }, {
-    name: '3D CASE',
-    image: '/images/3d.jpg',
-    price: '$30.00',
-    discountPrice: '$16.00',
-  }, {
-    name: '3D CASE',
-    image: '/images/3d.jpg',
-    price: '$30.00',
-    discountPrice: '$16.00',
-  }, {
-    name: '3D CASE',
-    image: '/images/3d.jpg',
-    price: '$30.00',
-    discountPrice: '$16.00',
-  }, {
-    name: '3D CASE',
-    image: '/images/3d.jpg',
-    price: '$30.00',
-    discountPrice: '$16.00',
-  }, {
-    name: '3D CASE',
-    image: '/images/3d.jpg',
-    price: '$30.00',
-    discountPrice: '$16.00',
-  }, {
-    name: '3D CASE',
-    image: '/images/3d.jpg',
-    price: '$30.00',
-    discountPrice: '$16.00',
-  }, {
-    name: '3D CASE',
-    image: '/images/3d.jpg',
-    price: '$30.00',
-    discountPrice: '$16.00',
-  }, {
-    name: '3D CASE',
-    image: '/images/3d.jpg',
-    price: '$30.00',
-    discountPrice: '$16.00',
-  },
-  // ... other items
-];
+  },];
 
 // Add cart functionality
 const addToCart = (item: any) => {
@@ -125,13 +68,13 @@ const addToCart = (item: any) => {
   localStorage.setItem('cart', JSON.stringify(cartItems));
 };
 
+
 export default function PhoneCaseTypePage() {
   const params = useParams();
   const { type } = params;
   const searchParams = useSearchParams();
   const what = searchParams.get('what');
 
-  // Add event listener for cart clicks
   useEffect(() => {
     const handleCartClick = (e: MouseEvent) => {
       const target = e.target as HTMLElement;
@@ -142,7 +85,7 @@ export default function PhoneCaseTypePage() {
             name: card.getAttribute('data-name'),
             image: card.getAttribute('data-image'),
             price: card.getAttribute('data-price'),
-            discountPrice: card.getAttribute('data-discount-price')
+            discountPrice: card.getAttribute('data-discount-price'),
           };
           addToCart(itemData);
         }
@@ -165,7 +108,7 @@ export default function PhoneCaseTypePage() {
 
         <div className="flex flex-wrap justify-center gap-24">
           {caseCategories.map((item, index) => {
-            const href = `/buy?name=${encodeURIComponent(item.name)}&price=${encodeURIComponent(item.price)}&discountPrice=${encodeURIComponent(item.discountPrice)}&image=${encodeURIComponent(item.image)}`;
+            const href = `/buy?id=${encodeURIComponent(item.id)}`;
             return (
               <div 
                 key={index} 

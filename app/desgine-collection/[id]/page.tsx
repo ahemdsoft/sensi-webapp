@@ -3,106 +3,37 @@ import { useParams, useSearchParams } from 'next/navigation';
 import CaseCard3 from '@/app/components/cart3';
 import { useEffect } from 'react';
 
+// Dummy JSON data
 const caseCategories = [
   {
+    id: 'case101',  // Added unique id for each product
     name: '3D CASE',
     image: '/images/3d.jpg',
     price: '$20.00',
     discountPrice: '$15.00',
   },
   {
-    name: '3D CASE',
-    image: '/images/3d.jpg',
-    price: '$30.00',
-    discountPrice: '$16.00',
-  }, {
-    name: '3D CASE',
-    image: '/images/3d.jpg',
-    price: '$30.00',
-    discountPrice: '$16.00',
-  }, {
-    name: '3D CASE',
-    image: '/images/3d.jpg',
-    price: '$30.00',
-    discountPrice: '$16.00',
-  }, {
-    name: '3D CASE',
-    image: '/images/3d.jpg',
-    price: '$30.00',
-    discountPrice: '$16.00',
-  }, {
-    name: '3D CASE',
-    image: '/images/3d.jpg',
-    price: '$30.00',
-    discountPrice: '$16.00',
-  }, {
-    name: '3D CASE',
-    image: '/images/3d.jpg',
-    price: '$30.00',
-    discountPrice: '$16.00',
-  }, {
-    name: '3D CASE',
-    image: '/images/3d.jpg',
-    price: '$30.00',
-    discountPrice: '$16.00',
-  }, {
-    name: '3D CASE',
-    image: '/images/3d.jpg',
-    price: '$30.00',
-    discountPrice: '$16.00',
-  }, {
-    name: '3D CASE',
-    image: '/images/3d.jpg',
-    price: '$30.00',
-    discountPrice: '$16.00',
-  }, {
-    name: '3D CASE',
-    image: '/images/3d.jpg',
-    price: '$30.00',
-    discountPrice: '$16.00',
-  }, {
-    name: '3D CASE',
-    image: '/images/3d.jpg',
-    price: '$30.00',
-    discountPrice: '$16.00',
-  }, {
-    name: '3D CASE',
-    image: '/images/3d.jpg',
-    price: '$30.00',
-    discountPrice: '$16.00',
-  }, {
-    name: '3D CASE',
-    image: '/images/3d.jpg',
-    price: '$30.00',
-    discountPrice: '$16.00',
-  }, {
-    name: '3D CASE',
-    image: '/images/3d.jpg',
-    price: '$30.00',
-    discountPrice: '$16.00',
-  }, {
-    name: '3D CASE',
-    image: '/images/3d.jpg',
-    price: '$30.00',
-    discountPrice: '$16.00',
-  }, {
-    name: '3D CASE',
-    image: '/images/3d.jpg',
-    price: '$30.00',
-    discountPrice: '$16.00',
-  }, {
+    id: 'case102',  // Another unique id
     name: '3D CASE',
     image: '/images/3d.jpg',
     price: '$30.00',
     discountPrice: '$16.00',
   },
-  // ... other items
+  // Additional cases with unique id
+  {
+    id: 'case103',
+    name: '3D CASE',
+    image: '/images/3d.jpg',
+    price: '$30.00',
+    discountPrice: '$16.00',
+  },
+  // Add more cases as needed...
 ];
 
-// Add cart functionality
+// Cart functionality
 const addToCart = (item: any) => {
   const cartItem = {
-    id: `${item.name}-${Date.now()}`,
+    id: item.id,  // Now using the unique id
     name: item.name,
     price: item.discountPrice,
     image: item.image,
@@ -113,7 +44,7 @@ const addToCart = (item: any) => {
   const existingCart = localStorage.getItem('cart');
   const cartItems = existingCart ? JSON.parse(existingCart) : [];
   
-  // Add new item
+  // Add new item to the cart
   cartItems.push(cartItem);
   
   // Save back to localStorage
@@ -122,9 +53,9 @@ const addToCart = (item: any) => {
 
 export default function DesignCollectionPage() {
   const params = useParams();
-  const { id } = params; // dynamic type like "3d", "2d"
+  const { id } = params; // Dynamic 'id' like '3d', '2d'
   const searchParams = useSearchParams();
-  const what = searchParams.get('what'); // category like anime, football
+  const what = searchParams.get('what'); // Category like anime, football
 
   // Add event listener for cart clicks
   useEffect(() => {
@@ -134,6 +65,7 @@ export default function DesignCollectionPage() {
         const card = target.closest('.case-card');
         if (card) {
           const itemData = {
+            id: card.getAttribute('data-id'),  // Use 'id' for fetching unique product
             name: card.getAttribute('data-name'),
             image: card.getAttribute('data-image'),
             price: card.getAttribute('data-price'),
@@ -160,12 +92,13 @@ export default function DesignCollectionPage() {
 
         <div className="flex flex-wrap justify-center gap-24">
           {caseCategories.map((item, index) => {
-            const href = `/buy?name=${encodeURIComponent(item.name)}&price=${encodeURIComponent(item.price)}&discountPrice=${encodeURIComponent(item.discountPrice)}&image=${encodeURIComponent(item.image)}`;
+            const href = `/buy?id=${encodeURIComponent(item.id)}`;
 
             return (
               <div 
                 key={index} 
                 className="case-card"
+                data-id={item.id}  // Add 'id' as data attribute
                 data-name={item.name}
                 data-image={item.image}
                 data-price={item.price}
