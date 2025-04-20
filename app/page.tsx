@@ -45,11 +45,13 @@ export default function Home() {
       {/* Background Section */}
       <section className="relative w-full min-h-screen overflow-hidden">
   {/* Fullscreen Background Image */}
-  <img
+  <Image
   src="/image/bgh.png"
   alt="Background"
-  className="absolute inset-0 w-full h-full object-cover z-0"
+  layout="fill"
+  className="absolute inset-0 object-cover z-0"
 />
+
 
 
   {/* Optional: black background fallback behind transparent areas */}

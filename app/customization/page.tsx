@@ -6,6 +6,7 @@ import { Input } from "@/app/components/ui/input";
 import { Textarea } from "@/app/components/ui/textarea";
 import { UploadCloud } from "lucide-react";
 import CaseCard from "@/app/components/cart2";
+import Image from "next/image";
 
 
 
@@ -160,11 +161,14 @@ export default function Customization() {
             <CardContent className="flex flex-col justify-center items-center h-full">
               <div className="border border-black w-40 h-80 flex flex-col justify-center items-center rounded-xl overflow-hidden">
                 {imagePreview ? (
-                  <img
-                    src={imagePreview}
-                    alt="Uploaded"
-                    className="w-full h-full object-contain"
-                  />
+                 <Image
+                 src={imagePreview}
+                 alt="Uploaded"
+                 layout="responsive"
+                 width={500}  // You can adjust these values based on your design
+                 height={500} // You can adjust these values based on your design
+                 className="object-contain w-full h-full"
+               />
                 ) : (
                   <>
                     <UploadCloud className="h-8 w-8" />

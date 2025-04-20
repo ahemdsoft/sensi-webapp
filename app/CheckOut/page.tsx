@@ -1,6 +1,9 @@
 'use client';
+
+
+
 import { useEffect, useState } from 'react';
-import { useSearchParams } from 'next/navigation';
+
 import Image from 'next/image';
 
 interface CartItem {
@@ -22,8 +25,17 @@ const Deliverycharge: DeliveryOption[] = [
   { charge: '100', name: 'Near Dhaka' },
 ];
 
+
+{/* fetching product using id  */}
+
+
 export default function CheckOut() {
-  const searchParams = useSearchParams();
+
+
+
+
+  
+  
   const [items, setItems] = useState<CartItem[]>([]);
   const [subtotal, setSubtotal] = useState(0);
   const [selectedDelivery, setSelectedDelivery] = useState<DeliveryOption | null>(null);
@@ -40,40 +52,21 @@ export default function CheckOut() {
   });
 
   useEffect(() => {
-    // Check if we have items from the cart (Buy All)
-    const itemsParam = searchParams.get('items');
-    if (itemsParam) {
-      try {
-        const cartItems = JSON.parse(decodeURIComponent(itemsParam));
-        setItems(cartItems);
-        
-        // Calculate subtotal price
-        const total = cartItems.reduce((sum: number, item: CartItem) => {
-          const price = parseFloat(item.price.replace(/[^\d.]/g, ''));
-          return sum + price;
-        }, 0);
-        setSubtotal(total);
-      } catch (error) {
-        console.error('Error parsing cart items:', error);
-      }
-    } 
-    // Check if we have a single item (Buy Now)
-    else if (searchParams.get('name')) {
-      const singleItem = {
-        id: Date.now().toString(),
-        name: searchParams.get('name') || '',
-        price: searchParams.get('price') || '',
-        image: searchParams.get('image') || '',
-        type: searchParams.get('type') || 'product'
-      };
-      setItems([singleItem]);
-      
-      // Calculate subtotal price for single item
-      const price = parseFloat(singleItem.price.replace(/[^\d.]/g, ''));
-      setSubtotal(price);
-    }
-  }, [searchParams]);
-
+    // Dummy item (replace this with real cart data later)
+    const dummyItem: CartItem = {
+      id: '123',
+      name: 'Dummy Product Name',
+      price: '999',
+      image: '/dummy-image.jpg', // Replace with real image path
+      type: 'product',
+    };
+  
+    setItems([dummyItem]);
+  
+    const price = parseFloat(dummyItem.price.replace(/[^\d.]/g, ''));
+    setSubtotal(price);
+  }, []);
+  
   // Update total price when subtotal or delivery charge changes
   useEffect(() => {
     const deliveryCharge = selectedDelivery ? parseFloat(selectedDelivery.charge) : 0;
@@ -364,7 +357,7 @@ export default function CheckOut() {
             
             <div className="text-center">
               <p className="text-sm text-gray-500 mb-4">
-                Thank you for your order! We'll send you a confirmation email shortly.
+                Thank you for your order! We&apos;ll send you a confirmation email shortly.
               </p>
               <button
                 onClick={closeSuccessPopup}

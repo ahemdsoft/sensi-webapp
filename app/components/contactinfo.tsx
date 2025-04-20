@@ -33,13 +33,13 @@ export default function ContactInfo() {
 
       <div className="flex space-x-4 mt-10 ">
         <a href="https://www.facebook.com/profile.php" className="w-8 h-8 text-black rounded-full flex items-center justify-center">
-          <Image src="/facebook.png" alt="email" width={20} height={20} />
+          <Image src="/facebook.png" alt="email" width={30} height={30} />
         </a>
         <a href="https://www.instagram.com/senshi_phone_casings/" className="w-8 h-8  text-black rounded-full flex items-center justify-center">
-        <Image src="/insta.png" alt="email" width={20} height={20} />
+        <Image src="/insta.png" alt="email" width={30} height={30} />
         </a>
         <a href="https://wwww.tiktok.com/" className="w-8 h-8 text-black rounded-full flex items-center justify-center">
-          <Image src="/tiktok.png" alt="email" width={20} height={20} />
+          <Image src="/tiktok.png" alt="email" width={30} height={30} />
         </a>
       </div>
 
