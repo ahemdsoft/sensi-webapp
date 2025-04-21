@@ -5,22 +5,22 @@ import Link from 'next/link';
 const caseCategories = [
   {
     name: '2D MAX CASE',
-    image: '/images/2dmax.jpg',
+    image: '/Component 6.png',
     href: '/phone-cases/2d-max',
   },
   {
     name: '2D CASE',
-    image: '/images/2d.jpg',
+    image: '/Component 7.png',
     href: '/phone-cases/2d',
   },
   {
     name: 'SOFT CASE',
-    image: '/images/soft.jpg',
+    image: '/Component 8.png',
     href: '/phone-cases/soft',
   },
   {
     name: '3D CASE',
-    image: '/images/3d.jpg',
+    image: '/Component 13.png',
     href: '/phone-cases/3d',
   },
 

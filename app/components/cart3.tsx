@@ -39,7 +39,7 @@ export default function CaseCard3({
       {/* Case Image */}
       <div className="flex justify-center items-center p-4">
         <div className="relative w-[220px] h-[320px]">
-          <Image src={image} alt={name} fill className="object-contain" />
+          <Image src={image} alt={name} fill className="object-contain  transition-transform duration-500 group-hover:scale-130" />
         </div>
       </div>
 

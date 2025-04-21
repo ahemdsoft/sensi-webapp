@@ -3,8 +3,10 @@
 
 
 import { useEffect, useState } from 'react';
+import Router from 'next/router';
 
 import Image from 'next/image';
+
 
 interface CartItem {
   id: string;
@@ -108,7 +110,7 @@ export default function CheckOut() {
         }),
       });
       
-      if (response.ok) {
+      if (!response.ok) {
         // Show success popup
         setShowSuccessPopup(true);
       } else {
@@ -122,6 +124,7 @@ export default function CheckOut() {
 
   const closeSuccessPopup = () => {
     setShowSuccessPopup(false);
+    Router.push('/'); // Redirect to home page or any other page
   };
 
   return (

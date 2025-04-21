@@ -11,12 +11,12 @@ export default function PhoneCaseTypePage() {
     {
       name: 'ANIME DESIGN',
       slug: 'anime',
-      image: '/images/design/anime.jpg',
+      image: '/Component 6.png',
     },
     {
       name: 'MARVEL/DC DESIGN',
       slug: 'marvel-dc',
-      image: '/images/design/marvel-dc.jpg',
+      image: '/Component 6.png',
     },
     {
       name: 'CARS & BIKES DESIGN',

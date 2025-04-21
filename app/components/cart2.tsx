@@ -4,16 +4,16 @@ import Link from 'next/link';
 
 export default function CaseCard({ image, name, href }: { image: string; name: string; href: string }) {
   return (
-    <div className="w-[306px] h-[463px] rounded-[10.5px] overflow-hidden border-2 border-gray-200 shadow-2xl bg-white flex flex-col">
+    <div className="w-[306px] h-[463px] rounded-[10.5px] coverflow-hidden border-2 border-gray-200 shadow-2xl bg-white flex flex-col">
       {/* Top white section */}
       <div className="bg-[#f7f7f7] p-4 flex flex-col items-center justify-start flex-grow">
         <h3 className="text-black font-bold text-center text-lg mb-4">{name}</h3>
-        <div className="relative w-[200px] h-[300px] rounded-2xl">
+        <div className="relative w-[200px] h-[300px]  rounded-2xl">
           <Image
             src={image}
             alt={name}
             fill
-            className="object-contain"
+            className="object-contain  "
           />
         </div>
       </div>

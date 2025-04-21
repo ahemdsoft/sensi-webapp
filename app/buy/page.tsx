@@ -16,7 +16,7 @@ export default function BuyNowPage() {
     name: "Cool Sneakers",
     price: "1200৳",
     discountPrice: "999৳",
-    image: "/sneakers.jpg",
+    image: "/Component 7.png",
     stock: 'true',
   };
 

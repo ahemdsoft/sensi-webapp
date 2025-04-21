@@ -8,14 +8,14 @@ const caseCategories = [
   {
     id: '101',  // Added unique id for each product
     name: '3D CASE',
-    image: '/images/3d.jpg',
+    image: '/Component 6.png',
     price: '$20.00',
     discountPrice: '$15.00',
   },
   {
     id: '102',  // Another unique id
     name: '3D CASE',
-    image: '/images/3d.jpg',
+    image: '/Component 7.png',
     price: '$30.00',
     discountPrice: '$16.00',
   },
@@ -23,7 +23,7 @@ const caseCategories = [
   {
     id: '103',
     name: '3D CASE',
-    image: '/images/3d.jpg',
+    image: '/Component 8.png',
     price: '$30.00',
     discountPrice: '$16.00',
   },
