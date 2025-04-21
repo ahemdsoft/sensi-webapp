@@ -6,7 +6,6 @@ import Image from 'next/image';
 import axios from 'axios';
 import { MagnifyingGlassIcon, ChevronDownIcon } from '@heroicons/react/24/outline';
 import CartOption from './cartOptions';
-
 const navItems = [
   { name: 'HOME', href: '/' },
   { name: 'PHONE CASES', href: '/phone-cases' },
@@ -35,12 +34,12 @@ export default function Navbar() {
   useEffect(() => {
     console.log('Searching status:', isSearching);
   }, [isSearching]);
-
   const handleSearch = async () => {
     if (!searchQuery.trim()) return;
-
+    
     try {
       setIsSearching(true);
+      window.location.href = `/desgine-collection/${searchQuery}`;
       const response = await axios.get(''); // Add real endpoint
       console.log('Search response:', response.data);
     } catch (error) {
@@ -77,24 +76,30 @@ export default function Navbar() {
               </svg>
             </button>
 
-            <div className="hidden md:flex items-center">
-              {searchOpen && (
-                <input
-                  type="text"
-                  placeholder="Search products..."
-                  value={searchQuery}
-                  onChange={(e) => setSearchQuery(e.target.value)}
-                  onKeyDown={handleSearchKeyPress}
-                  className="p-2 border rounded-lg w-full md:w-64 animate-slideIn"
-                />
-              )}
-              <button
-                onClick={() => setSearchOpen(!searchOpen)}
-                className="p-2 hover:bg-gray-100 rounded-full transition-colors"
-              >
-                <MagnifyingGlassIcon className="h-6 w-6 text-gray-600" />
-              </button>
-            </div>
+            <div className="hidden md:flex items-center relative">
+  <button
+    onClick={() => setSearchOpen(!searchOpen)}
+    className="p-2 hover:bg-gray-600 rounded-full transition-colors"
+  >
+    <MagnifyingGlassIcon className="h-6 w-6 text-white" />
+  </button>
+
+  <div
+    className={`absolute left-12 transition-all duration-300 ease-in-out ${
+      searchOpen ? 'opacity-100 scale-100 w-64' : 'opacity-0 scale-95 w-0'
+    } overflow-hidden`}
+  >
+    <input
+      type="text"
+      placeholder="Search products..."
+      value={searchQuery}
+      onChange={(e) => setSearchQuery(e.target.value)}
+      onKeyDown={handleSearchKeyPress}
+      className="p-2 pl-4 pr-4 border border-gray-800 rounded-xl shadow-sm w-full focus:outline-none focus:ring-2 focus:ring-blue-400 bg-gray-600 text-sm transition-all"
+    />
+  </div>
+</div>
+
           </div>
 
           <Link href="/" className="flex-shrink-0">
