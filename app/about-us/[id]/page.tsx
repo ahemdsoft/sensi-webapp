@@ -1,6 +1,7 @@
 'use client';
+
 import { useParams } from "next/navigation";
-export default function localPage() {
+export default function LocalPage() {
     const params = useParams();
     const {id} = params;
 
