@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import Image from 'next/image';
 
 interface OrderItem {
   id: number;
@@ -133,10 +134,12 @@ export default function OrdersPage() {
                   {order.items.map((item) => (
                     <div key={item.id} className="flex items-center justify-between">
                       <div className="flex items-center">
-                        <img
+                        <Image
                           src={item.image}
                           alt={item.name}
                           className="h-10 w-10 rounded-full object-cover"
+                          width={40}
+                          height={40}
                         />
                         <div className="ml-4">
                           <div className="text-sm font-medium text-gray-900">{item.name}</div>

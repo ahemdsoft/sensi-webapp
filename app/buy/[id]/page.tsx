@@ -12,6 +12,7 @@ export default function BuyNowPage() {
   console.log(id);
   // This would typically come from an API call based on the id
   const product = {
+    id: 1,
     name: "Cool Sneakers",
     price: 1200,
     discountPrice: 999,
