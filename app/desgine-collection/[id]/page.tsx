@@ -6,38 +6,46 @@ import { useCart } from '@/app/context/CartContext';
 // Dummy JSON data
 const caseCategories = [
   {
-    id: '101',  // Added unique id for each product
+    id: 101,  // Added unique id for each product
     name: '3D CASE',
     image: '/Component 6.png',
-    price: '$20.00',
-    discountPrice: '$15.00',
-    stock:10,
+    price: 20.00,
+    discountPrice: 15.00,
+    mobile: 'redminote 9',
+    stock: 10,
+    brand: 'redmi'
   },
   {
-    id: '102',  // Another unique id
+    id: 102,  // Another unique id
     name: '3D CASE',
     image: '/Component 7.png',
-    price: '$30.00',
-    discountPrice: '$16.00',
-    stock:10,
+    price: 30.00,
+    discountPrice: 16.00,
+    mobile: 'redminote 9',
+    stock: 10,
+    brand: 'realme'
   },
   // Additional cases with unique id
   {
-    id: '103',
+    id: 103,
     name: '3D CASE',
     image: '/Component 8.png',
-    price: '$30.00',
-    discountPrice: '$16.00',
-    stock:10,
+    price: 30.00,
+    discountPrice: 16.00,
+    mobile: 'redminote 9',
+    brand: 'oppo',
+    stock: 10,
   },
   // Add more cases as needed...
 ];
 
 type CartItem = {
-  id: string;  // Unique id for each product
+  id: number;  // Unique id for each product
   name: string;
-  discountPrice: string;  // Price should be string, as it's formatted like "$20.00"
+  discountPrice: number;  // Price should be number
   image: string;
+  mobile: string;
+  brand: string;
 };
 
 export default function DesignCollectionPage() {
@@ -52,7 +60,9 @@ export default function DesignCollectionPage() {
       name: item.name,
       price: item.discountPrice,
       image: item.image,
-      type: 'design'
+      type: 'design',
+      mobile: item.mobile, 
+      brand: item.brand,
     };
     
     addToCart(cartItem);

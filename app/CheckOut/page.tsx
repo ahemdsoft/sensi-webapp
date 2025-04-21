@@ -1,23 +1,24 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import Router from 'next/router';
+import { useRouter } from 'next/navigation';
 import Image from 'next/image';
 import { useCart } from '../context/CartContext';
 import { FiTrash2 } from 'react-icons/fi';
 
 interface DeliveryOption {
-  charge: string;
+  charge: number;
   name: string;
 }
 
 const Deliverycharge: DeliveryOption[] = [
-  { charge: '70', name: 'Dhaka City' },
-  { charge: '130', name: 'Outside Dhaka City' },
-  { charge: '100', name: 'Near Dhaka' },
+  { charge: 70, name: 'Dhaka City' },
+  { charge: 130, name: 'Outside Dhaka City' },
+  { charge: 100, name: 'Near Dhaka' },
 ];
 
 export default function CheckOut() {
+  const router = useRouter();
   const { cartItems, clearCart, removeFromCart } = useCart();
   const [subtotal, setSubtotal] = useState(0);
   const [selectedDelivery, setSelectedDelivery] = useState<DeliveryOption | null>(null);
@@ -34,17 +35,23 @@ export default function CheckOut() {
   });
 
   useEffect(() => {
-    // Calculate subtotal from cart items
+    // Only redirect if cart is empty and we're not showing the success popup
+    if (cartItems.length === 0 && !showSuccessPopup) {
+      router.push('/');
+    }
+  }, [cartItems, router, showSuccessPopup]);
+  
+  // Calculate subtotal from cart items
+  useEffect(() => {
     const total = cartItems.reduce((sum, item) => {
-      const price = parseFloat(item.price.replace(/[^\d.]/g, ''));
-      return sum + price;
+      return sum + (typeof item.price === 'number' ? item.price : 0);
     }, 0);
     setSubtotal(total);
   }, [cartItems]);
   
   // Update total price when subtotal or delivery charge changes
   useEffect(() => {
-    const deliveryCharge = selectedDelivery ? parseFloat(selectedDelivery.charge) : 0;
+    const deliveryCharge = selectedDelivery ? selectedDelivery.charge : 0;
     setTotalPrice(subtotal + deliveryCharge);
   }, [subtotal, selectedDelivery]);
 
@@ -60,7 +67,7 @@ export default function CheckOut() {
     }));
   };
 
-  const handleRemoveItem = (itemId: string) => {
+  const handleRemoveItem = (itemId: number) => {
     removeFromCart(itemId);
   };
 
@@ -92,6 +99,8 @@ export default function CheckOut() {
         setShowSuccessPopup(true);
         clearCart(); // Clear the cart after successful order
       } else {
+        const errorData = await response.json().catch(() => null);
+        console.error('Order placement failed:', errorData);
         alert('Failed to place order. Please try again.');
       }
     } catch (error) {
@@ -102,8 +111,12 @@ export default function CheckOut() {
 
   const closeSuccessPopup = () => {
     setShowSuccessPopup(false);
-    Router.push('/'); // Redirect to home page or any other page
+    router.push('/');
   };
+
+  if (cartItems.length === 0 && !showSuccessPopup) {
+    return null;
+  }
 
   return (
     <div className=''>
@@ -238,7 +251,7 @@ export default function CheckOut() {
                       </div>
                       <div className="flex-1">
                         <h3 className="font-medium">{item.name}</h3>
-                        <p className="text-gray-600">{item.price}</p>
+                        <p className="text-gray-600">৳{item.price.toFixed(2)}</p>
                       </div>
                       <button 
                         onClick={() => handleRemoveItem(item.id)}
@@ -268,7 +281,7 @@ export default function CheckOut() {
                           htmlFor={`delivery-${index}`} 
                           className="ms-2 text-sm font-medium text-gray-900"
                         >
-                          {option.name}: {option.charge} BDT
+                          {option.name}: ৳{option.charge}
                         </label>
                       </div>
                     ))}
@@ -278,15 +291,15 @@ export default function CheckOut() {
                 <div className="border-t pt-4">
                   <div className="flex justify-between mb-2">
                     <span className="font-medium">Subtotal:</span>
-                    <span>{subtotal.toFixed(2)} BDT</span>
+                    <span>৳{subtotal.toFixed(2)}</span>
                   </div>
                   <div className="flex justify-between mb-2">
                     <span className="font-medium">Shipping:</span>
-                    <span>{selectedDelivery ? `${selectedDelivery.charge} BDT` : 'Select delivery option'}</span>
+                    <span>{selectedDelivery ? `৳${selectedDelivery.charge}` : 'Select delivery option'}</span>
                   </div>
                   <div className="flex justify-between font-bold text-lg">
                     <span>Total:</span>
-                    <span>{totalPrice.toFixed(2)} BDT</span>
+                    <span>৳{totalPrice.toFixed(2)}</span>
                   </div>
                 </div>
               </>
@@ -322,15 +335,15 @@ export default function CheckOut() {
                 </div>
                 <div className="flex justify-between">
                   <span className="text-gray-600">Subtotal:</span>
-                  <span className="font-medium">{subtotal.toFixed(2)} BDT</span>
+                  <span className="font-medium">৳{subtotal.toFixed(2)}</span>
                 </div>
                 <div className="flex justify-between">
                   <span className="text-gray-600">Delivery:</span>
-                  <span className="font-medium">{selectedDelivery?.name} ({selectedDelivery?.charge} BDT)</span>
+                  <span className="font-medium">{selectedDelivery?.name} (৳{selectedDelivery?.charge})</span>
                 </div>
                 <div className="flex justify-between font-bold">
                   <span>Total:</span>
-                  <span>{totalPrice.toFixed(2)} BDT</span>
+                  <span>৳{totalPrice.toFixed(2)}</span>
                 </div>
               </div>
             </div>

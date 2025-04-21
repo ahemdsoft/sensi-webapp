@@ -11,9 +11,7 @@ export default function CartOption() {
 
   // Calculate total price
   const totalPrice = cartItems.reduce((total, item) => {
-    // Convert price string to number, removing any currency symbols
-    const price = parseFloat(item.price.replace(/[^\d.]/g, ""));
-    return total + price;
+    return total + item.price;
   }, 0);
 
   return (
@@ -81,7 +79,6 @@ export default function CartOption() {
                   >
                     <div className="flex items-center justify-between">
                       <div className="flex items-center space-x-2">
-                      
                         <Image
                           src={item.image}
                           alt={item.name}
@@ -91,7 +88,7 @@ export default function CartOption() {
                         />
                         <div>
                           <p className="font-medium">{item.name}</p>
-                          <p className="text-sm text-gray-600">{item.price}</p>
+                          <p className="text-sm text-gray-600">৳{item.price.toFixed(2)}</p>
                         </div>
                       </div>
                       <button
@@ -103,11 +100,7 @@ export default function CartOption() {
                     </div>
                     <div className="mt-2 flex justify-end">
                       <Link
-                        href={`/buy?name=${encodeURIComponent(
-                          item.name
-                        )}&price=${encodeURIComponent(
-                          item.price
-                        )}&image=${encodeURIComponent(item.image)}`}
+                        href={`/CheckOut`}
                         className="bg-[#3C1630] text-white font-bold px-4 py-1 rounded-full shadow hover:shadow-[0_4px_10px_#BF00FFA3] transition duration-200 text-sm"
                         onClick={() => setCartOpen(false)}
                       >
@@ -122,14 +115,12 @@ export default function CartOption() {
                 <div className="flex justify-between items-center mb-4">
                   <span className="font-semibold">Total:</span>
                   <span className="font-bold text-lg">
-                    ${totalPrice.toFixed(2)}
+                    ৳{totalPrice.toFixed(2)}
                   </span>
                 </div>
 
                 <Link
-                  href={`/CheckOut?items=${encodeURIComponent(
-                    JSON.stringify(cartItems)
-                  )}`}
+                  href="/CheckOut"
                   className="w-full bg-[#3C1630] text-white font-bold py-2 rounded-full shadow hover:shadow-[0_4px_10px_#BF00FFA3] transition duration-200 text-center block"
                   onClick={() => setCartOpen(false)}
                 >

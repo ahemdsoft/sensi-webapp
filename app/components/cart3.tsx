@@ -17,8 +17,8 @@ export default function CaseCard3({
   name: string;
   href: string;
   onBuyNow?: () => void;
-  price: string;
-  discountPrice: string;
+  price: number;
+  discountPrice: number;
 }) {
   const params = useParams();
   const type = params.type as string;
@@ -26,11 +26,13 @@ export default function CaseCard3({
 
   const handleAddToCart = () => {
     const cartItem = {
-      id: `${type}-${name}-${Date.now()}`,
+      id: Math.floor(Math.random() * 1000000),
       name,
       price: discountPrice,
       image,
-      type
+      type,
+      brand: '',
+      mobile: ''
     };
     
     addToCart(cartItem);

@@ -9,29 +9,43 @@ export default function BuyNowPage() {
   const { id } = useParams();
   const router = useRouter();
   const { addToCart } = useCart();
-console.log(id);
+  console.log(id);
+  // This would typically come from an API call based on the id
   const product = {
     name: "Cool Sneakers",
-    price: "1200৳",
-    discountPrice: "999৳",
+    price: 1200,
+    discountPrice: 999,
     image: "/Component 7.png",
     stock: 10,
     productdetails: 'This is a premium pair of sneakers designed for comfort and style. Perfect for all occasions.',
+    mobile: 'redminote 9',
+    brand: 'realme'
   };
 
   const [quantity, setQuantity] = useState(1);
 
+  // Function to generate a random number for ID
+  const generateRandomId = () => {
+    return Math.floor(Math.random() * 1000000);
+  };
+
   const handleBuyNow = () => {
+    // Add the item to cart the number of times specified by quantity
     for (let i = 0; i < quantity; i++) {
       const cartItem = {
-        id: `${product.name}-${Date.now()}-${i}`,
+        id: generateRandomId(),
         name: product.name,
         price: product.discountPrice,
         image: product.image,
-        type: 'product'
+        type: 'product',
+        brand: product.brand,
+        mobile: product.mobile
       };
+      
       addToCart(cartItem);
     }
+    
+    // Redirect to checkout page
     router.push('/CheckOut');
   };
 
@@ -55,8 +69,8 @@ console.log(id);
           <div>
             <h1 className="text-4xl font-extrabold text-gray-800">{product.name}</h1>
             <div className="mt-3 space-y-1">
-              <p className="text-xl line-through text-gray-400">{product.price}</p>
-              <p className="text-3xl font-bold text-pink-600">{product.discountPrice}</p>
+              <p className="text-xl line-through text-gray-400">{product.price}৳</p>
+              <p className="text-3xl font-bold text-pink-600">{product.discountPrice}৳</p>
               <p className="text-sm font-medium text-green-600">{product.stock ? "In Stock" : "Out of Stock"}</p>
             </div>
           </div>
@@ -76,13 +90,12 @@ console.log(id);
                 onChange={(e) => setQuantity(Math.max(1, parseInt(e.target.value) || 1))}
                 className="w-16 text-center border border-gray-300 rounded-md p-1 shadow-sm"
               />
-<button 
-  onClick={() => setQuantity(prev => Math.min(Number(product.stock), prev + 1))}
-  disabled={quantity >= Number(product.stock)}
-  className={`w-8 h-8 rounded-full text-lg font-bold transition 
-    ${quantity >= Number(product.stock) ? 'bg-gray-300 cursor-not-allowed' : 'bg-gray-200 hover:bg-gray-300'}`}
->+</button>
-
+              <button 
+                onClick={() => setQuantity(prev => Math.min(Number(product.stock), prev + 1))}
+                disabled={quantity >= Number(product.stock)}
+                className={`w-8 h-8 rounded-full text-lg font-bold transition 
+                  ${quantity >= Number(product.stock) ? 'bg-gray-300 cursor-not-allowed' : 'bg-gray-200 hover:bg-gray-300'}`}
+              >+</button>
             </div>
           </div>
 
