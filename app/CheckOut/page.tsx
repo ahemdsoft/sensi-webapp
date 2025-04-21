@@ -1,20 +1,10 @@
 'use client';
 
-
-
 import { useEffect, useState } from 'react';
 import Router from 'next/router';
-
 import Image from 'next/image';
-
-
-interface CartItem {
-  id: string;
-  name: string;
-  price: string;
-  image: string;
-  type: string;
-}
+import { useCart } from '../context/CartContext';
+import { FiTrash2 } from 'react-icons/fi';
 
 interface DeliveryOption {
   charge: string;
@@ -27,18 +17,8 @@ const Deliverycharge: DeliveryOption[] = [
   { charge: '100', name: 'Near Dhaka' },
 ];
 
-
-{/* fetching product using id  */}
-
-
 export default function CheckOut() {
-
-
-
-
-  
-  
-  const [items, setItems] = useState<CartItem[]>([]);
+  const { cartItems, clearCart, removeFromCart } = useCart();
   const [subtotal, setSubtotal] = useState(0);
   const [selectedDelivery, setSelectedDelivery] = useState<DeliveryOption | null>(null);
   const [totalPrice, setTotalPrice] = useState(0);
@@ -54,20 +34,13 @@ export default function CheckOut() {
   });
 
   useEffect(() => {
-    // Dummy item (replace this with real cart data later)
-    const dummyItem: CartItem = {
-      id: '123',
-      name: 'Dummy Product Name',
-      price: '999',
-      image: '/dummy-image.jpg', // Replace with real image path
-      type: 'product',
-    };
-  
-    setItems([dummyItem]);
-  
-    const price = parseFloat(dummyItem.price.replace(/[^\d.]/g, ''));
-    setSubtotal(price);
-  }, []);
+    // Calculate subtotal from cart items
+    const total = cartItems.reduce((sum, item) => {
+      const price = parseFloat(item.price.replace(/[^\d.]/g, ''));
+      return sum + price;
+    }, 0);
+    setSubtotal(total);
+  }, [cartItems]);
   
   // Update total price when subtotal or delivery charge changes
   useEffect(() => {
@@ -87,6 +60,10 @@ export default function CheckOut() {
     }));
   };
 
+  const handleRemoveItem = (itemId: string) => {
+    removeFromCart(itemId);
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!selectedDelivery) {
@@ -102,7 +79,7 @@ export default function CheckOut() {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          items,
+          items: cartItems,
           subtotal,
           deliveryCharge: selectedDelivery,
           totalPrice,
@@ -113,6 +90,7 @@ export default function CheckOut() {
       if (!response.ok) {
         // Show success popup
         setShowSuccessPopup(true);
+        clearCart(); // Clear the cart after successful order
       } else {
         alert('Failed to place order. Please try again.');
       }
@@ -245,10 +223,10 @@ export default function CheckOut() {
           <div className="bg-white p-6 rounded-lg shadow-md">
             <h2 className="text-xl font-semibold mb-4">Order Summary</h2>
             
-            {items.length > 0 ? (
+            {cartItems.length > 0 ? (
               <>
                 <div className="space-y-4 mb-6">
-                  {items.map((item) => (
+                  {cartItems.map((item) => (
                     <div key={item.id} className="flex items-center border-b pb-4">
                       <div className="w-20 h-20 relative mr-4">
                         <Image 
@@ -262,6 +240,13 @@ export default function CheckOut() {
                         <h3 className="font-medium">{item.name}</h3>
                         <p className="text-gray-600">{item.price}</p>
                       </div>
+                      <button 
+                        onClick={() => handleRemoveItem(item.id)}
+                        className="text-red-500 hover:text-red-700 p-2"
+                        aria-label="Remove item"
+                      >
+                        <FiTrash2 className="w-5 h-5" />
+                      </button>
                     </div>
                   ))}
                 </div>
@@ -333,7 +318,7 @@ export default function CheckOut() {
               <div className="space-y-2">
                 <div className="flex justify-between">
                   <span className="text-gray-600">Items:</span>
-                  <span className="font-medium">{items.length}</span>
+                  <span className="font-medium">{cartItems.length}</span>
                 </div>
                 <div className="flex justify-between">
                   <span className="text-gray-600">Subtotal:</span>

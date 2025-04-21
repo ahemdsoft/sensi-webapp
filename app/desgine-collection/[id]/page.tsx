@@ -1,7 +1,7 @@
 'use client';
-import { useParams } from 'next/navigation';
+import { useParams, useRouter } from 'next/navigation';
 import CaseCard3 from '@/app/components/cart3';
-import { useEffect } from 'react';
+import { useCart } from '@/app/context/CartContext';
 
 // Dummy JSON data
 const caseCategories = [
@@ -11,6 +11,7 @@ const caseCategories = [
     image: '/Component 6.png',
     price: '$20.00',
     discountPrice: '$15.00',
+    stock:10,
   },
   {
     id: '102',  // Another unique id
@@ -18,6 +19,7 @@ const caseCategories = [
     image: '/Component 7.png',
     price: '$30.00',
     discountPrice: '$16.00',
+    stock:10,
   },
   // Additional cases with unique id
   {
@@ -26,63 +28,36 @@ const caseCategories = [
     image: '/Component 8.png',
     price: '$30.00',
     discountPrice: '$16.00',
+    stock:10,
   },
   // Add more cases as needed...
 ];
+
 type CartItem = {
   id: string;  // Unique id for each product
   name: string;
   discountPrice: string;  // Price should be string, as it's formatted like "$20.00"
   image: string;
 };
-// Cart functionality
-const addToCart = (item: CartItem) => {
-  const cartItem = {
-    id: item.id,  // Now using the unique id
-    name: item.name,
-    price: item.discountPrice,
-    image: item.image,
-    type: 'design'
-  };
-
-  // Get existing cart items
-  const existingCart = localStorage.getItem('cart');
-  const cartItems = existingCart ? JSON.parse(existingCart) : [];
-  
-  // Add new item to the cart
-  cartItems.push(cartItem);
-  
-  // Save back to localStorage
-  localStorage.setItem('cart', JSON.stringify(cartItems));
-};
 
 export default function DesignCollectionPage() {
   const params = useParams();
+  const router = useRouter();
   const { id } = params; // Dynamic 'id' like '3d', '2d'
- // Category like anime, football
+  const { addToCart } = useCart();
 
-  // Add event listener for cart clicks
-  useEffect(() => {
-    const handleCartClick = (e: MouseEvent) => {
-      const target = e.target as HTMLElement;
-      if (target.closest('.cart-icon')) {
-        const card = target.closest('.case-card');
-        if (card) {
-          const itemData = {
-            id: card.getAttribute('data-id')  ?? "",  // Use 'id' for fetching unique product
-            name: card.getAttribute('data-name') ?? "",
-            image: card.getAttribute('data-image') ?? "",
-            price: card.getAttribute('data-price') ?? "",
-            discountPrice: card.getAttribute('data-discount-price') ?? "",
-          };
-          addToCart(itemData);
-        }
-      }
+  const handleBuyNow = (item: CartItem) => {
+    const cartItem = {
+      id: item.id,  // Now using the unique id
+      name: item.name,
+      price: item.discountPrice,
+      image: item.image,
+      type: 'design'
     };
-
-    document.addEventListener('click', handleCartClick);
-    return () => document.removeEventListener('click', handleCartClick);
-  }, []);
+    
+    addToCart(cartItem);
+    router.push('/CheckOut');
+  };
 
   return (
     <div className="p-4 flex flex-col items-center justify-center min-h-screen bg-[#ffffff]">
@@ -96,7 +71,7 @@ export default function DesignCollectionPage() {
 
         <div className="flex flex-wrap justify-center gap-24">
           {caseCategories.map((item, index) => {
-            const href = `/buy?id=${encodeURIComponent(item.id)}`;
+            const href = `/buy/${(item.id)}`;
 
             return (
               <div 
@@ -107,15 +82,15 @@ export default function DesignCollectionPage() {
                 data-image={item.image}
                 data-price={item.price}
                 data-discount-price={item.discountPrice}
-              >
+              >{(1<=item.stock)?
                 <CaseCard3
                   image={item.image}
                   name={item.name}
                   price={item.price}
                   discountPrice={item.discountPrice}
                   href={href}
-                  href2={ `/CheckOut?id=${(item.id)}`}
-                />
+                  onBuyNow={() => handleBuyNow(item)}
+                />:""}
               </div>
             );
           })}

@@ -9,14 +9,14 @@ export default function CaseCard3({
   image,
   name,
   href,
-  href2,
+  onBuyNow,
   price,
   discountPrice,
 }: {
   image: string;
   name: string;
   href: string;
-  href2: string;
+  onBuyNow?: () => void;
   price: string;
   discountPrice: string;
 }) {
@@ -70,12 +70,21 @@ export default function CaseCard3({
         <FiHeart className="text-black text-[20px] cursor-pointer" />
 
         {/* Buy Now Button */}
-        <Link
-          href={href2}
-          className="bg-[#3C1630] text-white font-bold px-6 py-2 rounded-full shadow hover:shadow-[0_4px_10px_#BF00FFA3] transition duration-200"
-        >
-          BUY NOW
-        </Link>
+        {onBuyNow ? (
+          <button
+            onClick={onBuyNow}
+            className="bg-[#3C1630] text-white font-bold px-6 py-2 rounded-full shadow hover:shadow-[0_4px_10px_#BF00FFA3] transition duration-200"
+          >
+            BUY NOW
+          </button>
+        ) : (
+          <Link
+            href={href}
+            className="bg-[#3C1630] text-white font-bold px-6 py-2 rounded-full shadow hover:shadow-[0_4px_10px_#BF00FFA3] transition duration-200"
+          >
+            BUY NOW
+          </Link>
+        )}
 
         {/* Cart Icon */}
         <FiShoppingBag 

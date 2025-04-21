@@ -1,4 +1,5 @@
 "use client";
+
 import { useState, ChangeEvent, FormEvent } from "react";
 import SuccessPopup from "./SuccessPopup";
 
@@ -22,7 +23,7 @@ export default function ContactForm() {
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {
-      const res = await fetch("", {
+      const res = await fetch("/contact", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData)
