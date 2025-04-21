@@ -93,6 +93,7 @@ export default function PhoneCaseTypePage() {
                   price={item.price}
                   discountPrice={item.discountPrice}
                   href={href}
+                  href2={`/CheckOut?id=${(item.id)}`}
                 />
               </div>
             );

@@ -129,7 +129,7 @@ export default function CheckOut() {
 
   return (
     <div className=''>
-      <div className="container w-[80%] h-full mx-auto px-4 py-8">
+      <div className="container w-[80%] h-full mx-auto px-4 text-black py-8">
         <h1 className="text-3xl font-bold mb-8 text-center">Checkout</h1>
         
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">

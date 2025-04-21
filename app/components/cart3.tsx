@@ -9,12 +9,14 @@ export default function CaseCard3({
   image,
   name,
   href,
+  href2,
   price,
   discountPrice,
 }: {
   image: string;
   name: string;
   href: string;
+  href2: string;
   price: string;
   discountPrice: string;
 }) {
@@ -38,9 +40,11 @@ export default function CaseCard3({
     <div className="w-[337px] h-[500px] bg-white rounded-[10.5px] flex flex-col justify-between border-2 border-gray-200 shadow-2xl">
       {/* Case Image */}
       <div className="flex justify-center items-center p-4">
-        <div className="relative w-[220px] h-[320px]">
-          <Image src={image} alt={name} fill className="object-contain  transition-transform duration-500 group-hover:scale-130" />
-        </div>
+        <Link href={href}>
+          <div className="relative w-[220px] h-[320px]">
+            <Image src={image} alt={name} fill className="object-contain  transition-transform duration-500 group-hover:scale-130" />
+          </div>
+        </Link>
       </div>
 
       {/* Title */}
@@ -67,7 +71,7 @@ export default function CaseCard3({
 
         {/* Buy Now Button */}
         <Link
-          href={href}
+          href={href2}
           className="bg-[#3C1630] text-white font-bold px-6 py-2 rounded-full shadow hover:shadow-[0_4px_10px_#BF00FFA3] transition duration-200"
         >
           BUY NOW

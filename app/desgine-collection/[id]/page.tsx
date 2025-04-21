@@ -114,6 +114,7 @@ export default function DesignCollectionPage() {
                   price={item.price}
                   discountPrice={item.discountPrice}
                   href={href}
+                  href2={ `/CheckOut?id=${(item.id)}`}
                 />
               </div>
             );
