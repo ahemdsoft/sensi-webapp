@@ -155,7 +155,7 @@ export default function Customization() {
 
   return (
     <div className="h-full w-full flex flex-col justify-center items-center">
-      <div className="md:h-[100%] md:w-[80%] w-full mt-5 mb-5 flex justify-center items-center ">
+      <div className="md:h-[100%] md:w-[80%] w-full mt-5 mb-5 flex justify-center text-black items-center ">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 p-6">
           <Card className="flex justify-center items-center h-96">
             <CardContent className="flex flex-col justify-center items-center h-full">

@@ -36,7 +36,7 @@ export default function ContactForm() {
   return (
     <>
       {showPopup && <SuccessPopup onClose={() => setShowPopup(false)} />}
-      <form onSubmit={handleSubmit} className="grid md:grid-cols-2 gap-4 w-full max-w-4xl mx-auto p-4">
+      <form onSubmit={handleSubmit} className="grid md:grid-cols-2 gap-4 w-full max-w-4xl text-black mx-auto p-4">
         <div>
           <label className="block text-sm">First Name</label>
           <input type="text" name="firstName" onChange={handleChange} required className="w-full border-b p-2" />
