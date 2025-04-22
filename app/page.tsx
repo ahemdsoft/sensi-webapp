@@ -2,6 +2,8 @@
 import CaseCard from './components/Cart';
 import Image from 'next/image';
 import Link from 'next/link';
+import Moreservise from './components/moreservise';
+import ProductSlider from './components/productslider';
 const caseCategories = [
   {
     name: '2D MAX CASE',
@@ -120,6 +122,19 @@ export default function Home() {
   className="w-full h-auto"
 />
 
+        </section>
+        <section className='w-full h-[100%] mb-12 flex flex-col bg-gray-50 pt-16 pb-12 justify-center items-center'>
+          
+          <div className='w-[85%] ml-3.5 h-[60%] flex flex-col gap-10 bg-gray-50'>
+            <div className='text- text-2xl font-Montaga underline-offset-4 underline '>Latest <span className='text-[#008ECC]'>Product</span></div>
+          <div className='w-full h-[100%] flex justify-center items-center'>
+          <ProductSlider/>
+          </div>
+          </div>
+
+        </section>
+        <section className='w-full h-[100%] mb-12 flex justify-center items-center bg-white'>
+          <Moreservise/>
         </section>
 
     </main>

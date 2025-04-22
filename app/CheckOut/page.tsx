@@ -260,8 +260,8 @@ export default function CheckOut() {
                     className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                   >
                     <option value="cash">Cash on Delivery</option>
-                    <option value="card">Credit/Debit Card</option>
-                    <option value="paypal">Online Banking</option>
+                
+                    <option value="paypal">Mobile  Banking</option>
                   </select>
                 </div>
 
