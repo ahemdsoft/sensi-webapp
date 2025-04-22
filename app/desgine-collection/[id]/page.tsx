@@ -63,6 +63,7 @@ export default function DesignCollectionPage() {
       type: 'design',
       mobile: item.mobile, 
       brand: item.brand,
+      quantity: 1,
     };
     
     addToCart(cartItem);
@@ -92,6 +93,7 @@ export default function DesignCollectionPage() {
                 data-image={item.image}
                 data-price={item.price}
                 data-discount-price={item.discountPrice}
+                data-quantity={1}
               >{(1<=item.stock)?
                 <CaseCard3
                   image={item.image}
@@ -100,6 +102,7 @@ export default function DesignCollectionPage() {
                   discountPrice={item.discountPrice}
                   href={href}
                   onBuyNow={() => handleBuyNow(item)}
+                  quantity={1}
                 />:""}
               </div>
             );

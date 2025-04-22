@@ -61,6 +61,7 @@ export default function PhoneCasesPage() {
       type: 'phone-case',
       mobile: item.mobile,
       brand: item.brand,
+      quantity: 1,
     };
     
     addToCart(cartItem);
@@ -99,6 +100,7 @@ export default function PhoneCasesPage() {
                     discountPrice={item.discountPrice}
                     href={href}
                     onBuyNow={() => handleBuyNow(item)}
+                    quantity={1}
                   />
                 ) : null}
               </div>

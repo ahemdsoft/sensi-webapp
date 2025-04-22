@@ -10,7 +10,6 @@ export default function BuyNowPage() {
   const router = useRouter();
   const { addToCart } = useCart();
   console.log(id);
-  // This would typically come from an API call based on the id
   const product = {
     id: 1,
     name: "Cool Sneakers",
@@ -25,28 +24,20 @@ export default function BuyNowPage() {
 
   const [quantity, setQuantity] = useState(1);
 
-  // Function to generate a random number for ID
-  const generateRandomId = () => {
-    return Math.floor(Math.random() * 1000000);
-  };
-
   const handleBuyNow = () => {
-    // Add the item to cart the number of times specified by quantity
-    for (let i = 0; i < quantity; i++) {
-      const cartItem = {
-        id: generateRandomId(),
-        name: product.name,
-        price: product.discountPrice,
-        image: product.image,
-        type: 'product',
-        brand: product.brand,
-        mobile: product.mobile
-      };
-      
-      addToCart(cartItem);
-    }
-    
-    // Redirect to checkout page
+    const cartItem = {
+      id: product.id,
+      name: product.name,
+      price: product.discountPrice,
+      image: product.image,
+      type: 'product',
+      brand: product.brand,
+      mobile: product.mobile,
+      quantity: quantity // Send quantity here
+    };
+
+    addToCart(cartItem);
+
     router.push('/CheckOut');
   };
 
@@ -95,8 +86,7 @@ export default function BuyNowPage() {
                 onClick={() => setQuantity(prev => Math.min(Number(product.stock), prev + 1))}
                 disabled={quantity >= Number(product.stock)}
                 className={`w-8 h-8 rounded-full text-lg font-bold transition 
-                  ${quantity >= Number(product.stock) ? 'bg-gray-300 cursor-not-allowed' : 'bg-gray-200 hover:bg-gray-300'}`}
-              >+</button>
+                  ${quantity >= Number(product.stock) ? 'bg-gray-300 cursor-not-allowed' : 'bg-gray-200 hover:bg-gray-300'}`}>+</button>
             </div>
           </div>
 

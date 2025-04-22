@@ -42,6 +42,7 @@ type CartItem = {
   type: string;
   brand: string;
   mobile: string;
+  quantity: number;
 };
 
 export default function Customization() {
@@ -96,7 +97,8 @@ export default function Customization() {
           image: imagePreview || '',
           type: 'custom',
           mobile: selectedModel,
-          brand: selectedBrand
+          brand: selectedBrand,
+          quantity: quantity,
         };
       } else {
         console.error("❌ Invalid price response");

@@ -1,4 +1,4 @@
-"use client";
+'use client';
 
 import { useState } from "react";
 import { useCart } from "../context/CartContext";
@@ -9,9 +9,9 @@ export default function CartOption() {
   const [cartOpen, setCartOpen] = useState(false);
   const { cartItems, removeFromCart, cartCount } = useCart();
 
-  // Calculate total price
+  // ✅ Updated total calculation using quantity
   const totalPrice = cartItems.reduce((total, item) => {
-    return total + item.price;
+    return total + (item.price * (item.quantity || 1));
   }, 0);
 
   return (
@@ -73,10 +73,7 @@ export default function CartOption() {
             <>
               <div className="space-y-4 flex-grow overflow-y-auto">
                 {cartItems.map((item) => (
-                  <div
-                    key={item.id}
-                    className="flex flex-col p-2 border rounded"
-                  >
+                  <div key={item.id} className="flex flex-col p-2 border rounded">
                     <div className="flex items-center justify-between">
                       <div className="flex items-center space-x-2">
                         <Image
@@ -88,7 +85,8 @@ export default function CartOption() {
                         />
                         <div>
                           <p className="font-medium">{item.name}</p>
-                          <p className="text-sm text-gray-600">৳{item.price.toFixed(2)}</p>
+                          <p className="text-sm text-gray-600">৳{item.price.toFixed(2)} × {item.quantity || 1}</p>
+                          <p className="text-sm font-medium text-pink-600">৳{(item.price * (item.quantity || 1)).toFixed(2)}</p>
                         </div>
                       </div>
                       <button
@@ -114,9 +112,7 @@ export default function CartOption() {
               <div className="mt-4 pt-4 border-t">
                 <div className="flex justify-between items-center mb-4">
                   <span className="font-semibold">Total:</span>
-                  <span className="font-bold text-lg">
-                    ৳{totalPrice.toFixed(2)}
-                  </span>
+                  <span className="font-bold text-lg">৳{totalPrice.toFixed(2)}</span>
                 </div>
 
                 <Link

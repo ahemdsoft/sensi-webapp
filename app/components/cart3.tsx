@@ -12,6 +12,8 @@ export default function CaseCard3({
   onBuyNow,
   price,
   discountPrice,
+  quantity,
+  
 }: {
   image: string;
   name: string;
@@ -19,6 +21,7 @@ export default function CaseCard3({
   onBuyNow?: () => void;
   price: number;
   discountPrice: number;
+  quantity: number;
 }) {
   const params = useParams();
   const type = params.type as string;
@@ -32,7 +35,8 @@ export default function CaseCard3({
       image,
       type,
       brand: '',
-      mobile: ''
+      mobile: '',
+      quantity,
     };
     
     addToCart(cartItem);
