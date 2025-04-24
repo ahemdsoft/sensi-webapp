@@ -72,7 +72,7 @@ export default function ContactForm() {
           <textarea name="message" rows={4} onChange={handleChange} required className="w-full border-b p-2" />
         </div>
         <div className="md:col-span-2 text-right">
-          <button type="submit" className="bg-black text-white px-6 py-2 rounded-md hover:bg-gray-800">
+          <button type="submit" className="bg-black cursor-pointer hover:text-gray-300 text-white px-6 py-2 rounded-md hover:bg-gray-800">
             Send Message
           </button>
         </div>

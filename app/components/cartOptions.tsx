@@ -16,7 +16,7 @@ export default function CartOption() {
 
   return (
     <>
-      <button onClick={() => setCartOpen(true)} className="p-2 relative">
+      <button onClick={() => setCartOpen(true)} className="p-2  hover:bg-gray-600 rounded-full transition-colors cursor-pointer relative">
         <svg
           className="w-6 h-6"
           stroke="currentColor"

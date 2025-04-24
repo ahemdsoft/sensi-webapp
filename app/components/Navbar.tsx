@@ -79,7 +79,7 @@ export default function Navbar() {
             <div className="hidden md:flex items-center relative">
   <button
     onClick={() => setSearchOpen(!searchOpen)}
-    className="p-2 hover:bg-gray-600 rounded-full transition-colors"
+    className="p-2 hover:bg-gray-600 rounded-full cursor-pointer transition-colors"
   >
     <MagnifyingGlassIcon className="h-6 w-6 text-white" />
   </button>
@@ -108,21 +108,21 @@ export default function Navbar() {
           </Link>
 
           <div className="flex items-center space-x-3">
-            <button className="p-2">
+            <button className="p-2 cursor-pointer hover:bg-gray-600 rounded-full transition-colors">
               <Link href="/auth">
                 <svg className="w-6 h-6" stroke="currentColor" fill="none" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
                 </svg>
               </Link>
             </button>
-            <button className="p-2 sm:block hidden">
+            <button className="p-2 cursor-pointer  hover:bg-gray-600 rounded-full transition-colors sm:block hidden">
               <Link href="/">
                 <svg className="w-6 h-6" stroke="currentColor" fill="none" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
                 </svg>
               </Link>
             </button>
-            <CartOption />
+            <CartOption/>
           </div>
         </div>
       </nav>

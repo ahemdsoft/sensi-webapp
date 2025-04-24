@@ -157,7 +157,7 @@ export default function Customization() {
         <div className="bg-white rounded-xl p-6 shadow space-y-4">
           <h2 className="text-2xl font-bold text-gray-800">Customize Your Case</h2>
 
-          <div className="grid grid-cols-4 gap-2">
+          <div className="grid grid-cols-4  gap-2">
             {Object.keys(brandData).map((brand) => (
               <Button
                 key={brand}
@@ -165,10 +165,10 @@ export default function Customization() {
                   setSelectedBrand(brand);
                   setSelectedModel("");
                 }}
-                className={`${
+                className={ `${
                   selectedBrand === brand
                     ? "bg-blue-600 text-white"
-                    : "bg-white text-gray-800 border border-gray-300"
+                    : "bg-white cursor-pointer text-gray-800 border border-gray-300"
                 }`}
               >
                 {brand}
@@ -177,7 +177,7 @@ export default function Customization() {
           </div>
 
           <select
-            className="w-full border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="w-full border border-gray-300 rounded-md p-2 focus:outline-none cursor-pointer focus:ring-2 focus:ring-blue-500"
             value={selectedModel}
             onChange={(e) => setSelectedModel(e.target.value)}
           >
@@ -198,7 +198,7 @@ export default function Customization() {
                 className={`${
                   selectedType === type
                     ? "bg-green-600 text-white"
-                    : "bg-white text-gray-800 border border-gray-300"
+                    : "bg-white text-gray-800 border cursor-pointer border-gray-300"
                 }`}
               >
                 {type}
@@ -206,7 +206,7 @@ export default function Customization() {
             ))}
           </div>
 
-          <Input type="file" onChange={handleImageUpload} />
+          <Input className="cursor-pointer" type="file" onChange={handleImageUpload} />
           <Textarea
             placeholder="Add any notes for the design..."
             value={notes}
@@ -224,11 +224,11 @@ export default function Customization() {
               variant="outline"
               onClick={handleAddToCart}
               disabled={loading}
-              className="w-full"
+              className="w-full cursor-pointer hover:bg-amber-950 hover:text-white hovr:p-2"
             >
               {loading ? "Adding..." : "Add to Cart"}
             </Button>
-            <Button onClick={handleBuyNow} disabled={loading} className="w-full hover:bg-blue-600">
+            <Button onClick={handleBuyNow} disabled={loading} className="w-full hover:bg-[#3C1630] border-1 border-black text-black hover:p-2 cursor-pointer hover:text-white">
               {loading ? "Processing..." : "Buy Now"}
             </Button>
           </div>
