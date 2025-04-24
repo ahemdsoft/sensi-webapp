@@ -1,6 +1,7 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { useRouter } from 'next/navigation';
 import bcrypt from 'bcryptjs';
 
 interface AuthModalProps {
@@ -10,13 +11,14 @@ interface AuthModalProps {
 }
 
 export default function AuthModal({ isOpen, onClose, mode }: AuthModalProps) {
+  const router = useRouter();
   const [authMode, setAuthMode] = useState(mode);
-  const [formData, setFormData] = useState({
-    email: '',
-    password: '',
-    name: ''
-  });
+  const [formData, setFormData] = useState({ email: '', password: '', name: '' });
   const [error, setError] = useState('');
+
+  useEffect(() => {
+    setAuthMode(mode);
+  }, [mode]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -24,14 +26,11 @@ export default function AuthModal({ isOpen, onClose, mode }: AuthModalProps) {
 
     try {
       if (authMode === 'signup') {
-        // Hash password for registration
         const hashedPassword = await bcrypt.hash(formData.password, 10);
-        
-        const response = await fetch('YOUR_API_ENDPOINT/register', {
+
+        const response = await fetch('/api/register', {
           method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
+          headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
             name: formData.name,
             email: formData.email,
@@ -40,22 +39,18 @@ export default function AuthModal({ isOpen, onClose, mode }: AuthModalProps) {
         });
 
         const data = await response.json();
-        
+
         if (response.ok) {
-          // Save JWT token
           sessionStorage.setItem('token', data.token);
-          console.log('Registration successful:', data);
-          onClose();
+          localStorage.setItem('accountName', data.name);
+          router.push('/dashboard');
         } else {
           setError(data.message || 'Registration failed');
         }
       } else {
-        // Login request
-        const response = await fetch('YOUR_API_ENDPOINT/login', {
+        const response = await fetch('/api/login', {
           method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
+          headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
             email: formData.email,
             password: formData.password,
@@ -63,12 +58,11 @@ export default function AuthModal({ isOpen, onClose, mode }: AuthModalProps) {
         });
 
         const data = await response.json();
-        
+
         if (response.ok) {
-          // Save JWT token
           sessionStorage.setItem('token', data.token);
-          console.log('Login successful:', data);
-          onClose();
+          localStorage.setItem('accountName', data.name);
+          router.push('/dashboard');
         } else {
           setError(data.message || 'Login failed');
         }
@@ -80,103 +74,85 @@ export default function AuthModal({ isOpen, onClose, mode }: AuthModalProps) {
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value
-    });
+    setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
   if (!isOpen) return null;
 
   return (
-    <div className="bg-white rounded-lg p-8 max-w-md w-full mx-auto border-2 border-gray-300 shadow-lg">
-      <div className="flex justify-between items-center mb-6">
-        <h2 className="text-2xl font-bold text-gray-900">
-          {authMode === 'login' ? 'Login' : 'Sign Up'}
-        </h2>
-        <button
-          onClick={onClose}
-          className="text-gray-400 hover:text-gray-500"
-        >
-          <span className="sr-only">Close</span>
-          <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-          </svg>
-        </button>
-      </div>
-
-      {error && (
-        <div className="mb-4 p-3 bg-red-100 text-red-700 rounded-md">
-          {error}
+    <div className="fixed inset-0 flex items-center justify-center bg-gradient-to-br from-gray-100 to-blue-100">
+      <div className="bg-white rounded-2xl p-10 w-full max-w-md shadow-xl border border-gray-200">
+        <div className="flex justify-between items-center mb-6">
+          <h2 className="text-3xl font-bold text-gray-800">
+            {authMode === 'login' ? 'Sign In' : 'Sign Up'}
+          </h2>
+          <button onClick={onClose} className="text-gray-400 hover:text-gray-600">
+            <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+            </svg>
+          </button>
         </div>
-      )}
 
-      <form onSubmit={handleSubmit} className="space-y-6">
-        {authMode === 'signup' && (
+        {error && <div className="mb-4 p-3 bg-red-100 text-red-700 rounded">{error}</div>}
+
+        <form onSubmit={handleSubmit} className="space-y-6">
+          {authMode === 'signup' && (
+            <div>
+              <label className="block text-sm font-medium text-gray-700">Name</label>
+              <input
+                type="text"
+                name="name"
+                required
+                value={formData.name}
+                onChange={handleChange}
+                className="mt-1 w-full rounded-md border-gray-300 focus:ring-blue-500 focus:border-blue-500 shadow-sm"
+              />
+            </div>
+          )}
+
           <div>
-            <label htmlFor="name" className="block text-sm font-medium text-gray-700">
-              Name
-            </label>
+            <label className="block text-sm font-medium text-gray-700">Email</label>
             <input
-              type="text"
-              name="name"
-              id="name"
+              type="email"
+              name="email"
               required
-              className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
-              value={formData.name}
+              value={formData.email}
               onChange={handleChange}
+              className="mt-1 w-full rounded-md border-gray-300 focus:ring-blue-500 focus:border-blue-500 shadow-sm"
             />
           </div>
-        )}
 
-        <div>
-          <label htmlFor="email" className="block text-sm font-medium text-gray-700">
-            Email
-          </label>
-          <input
-            type="email"
-            name="email"
-            id="email"
-            required
-            className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
-            value={formData.email}
-            onChange={handleChange}
-          />
+          <div>
+            <label className="block text-sm font-medium text-gray-700">Password</label>
+            <input
+              type="password"
+              name="password"
+              required
+              value={formData.password}
+              onChange={handleChange}
+              className="mt-1 w-full rounded-md border-gray-300 focus:ring-blue-500 focus:border-blue-500 shadow-sm"
+            />
+          </div>
+
+          <button
+            type="submit"
+            className="w-full py-2 px-4 bg-blue-600 text-white font-medium rounded-md hover:bg-blue-700 shadow transition"
+          >
+            {authMode === 'login' ? 'Sign In' : 'Create Account'}
+          </button>
+        </form>
+
+        <div className="mt-6 text-center">
+          <button
+            onClick={() => setAuthMode(authMode === 'login' ? 'signup' : 'login')}
+            className="text-sm text-blue-600 hover:text-blue-500"
+          >
+            {authMode === 'login'
+              ? "Don't have an account? Sign up"
+              : 'Already have an account? Sign in'}
+          </button>
         </div>
-
-        <div>
-          <label htmlFor="password" className="block text-sm font-medium text-gray-700">
-            Password
-          </label>
-          <input
-            type="password"
-            name="password"
-            id="password"
-            required
-            className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
-            value={formData.password}
-            onChange={handleChange}
-          />
-        </div>
-
-        <button
-          type="submit"
-          className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-        >
-          {authMode === 'login' ? 'Sign In' : 'Create Account'}
-        </button>
-      </form>
-
-      <div className="mt-6 text-center">
-        <button
-          onClick={() => setAuthMode(authMode === 'login' ? 'signup' : 'login')}
-          className="text-sm text-indigo-600 hover:text-indigo-500"
-        >
-          {authMode === 'login'
-            ? "Don't have an account? Sign up"
-            : 'Already have an account? Sign in'}
-        </button>
       </div>
     </div>
   );
-} 
+}

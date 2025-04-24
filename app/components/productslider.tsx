@@ -38,7 +38,7 @@ export default function Page() {
             initial={{ x: direction > 0 ? '100%' : '-100%', opacity: 0 }}
             animate={{ x: 0, opacity: 1 }}
             exit={{ x: direction > 0 ? '-100%' : '100%', opacity: 0 }}
-            transition={{ duration: 1.9 }}
+            transition={{ duration: 1.4 }}
             className="absolute top-0 left-0 w-full h-full object-cover"
           />
         </AnimatePresence>
@@ -52,7 +52,7 @@ export default function Page() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            transition={{ duration: 1.9 }}
+            transition={{ duration: 1.4 }}
           ><Link href={`/buy/${currentProduct.id}`}>
             <h2 className="text-3xl font-bold">{currentProduct.name}</h2>
             <p className="text-gray-500 text-lg">{currentProduct.category}</p></Link>

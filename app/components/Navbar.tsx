@@ -93,6 +93,7 @@ export default function Navbar() {
       type="text"
       placeholder="Search products..."
       value={searchQuery}
+      
       onChange={(e) => setSearchQuery(e.target.value)}
       onKeyDown={handleSearchKeyPress}
       className="p-2 pl-4 pr-4 border border-gray-800 rounded-xl shadow-sm w-full focus:outline-none focus:ring-2 focus:ring-blue-400 bg-gray-600 text-sm transition-all"
@@ -145,6 +146,7 @@ export default function Navbar() {
                           </Link>
                         </li>
                       ))}
+                      
                     </ul>
                   </div>
                 </div>
@@ -162,51 +164,68 @@ export default function Navbar() {
             );
           })}
         </div>
-
         {menuOpen && (
-          <div className="absolute top-16 left-0 w-full bg-black text-white flex flex-col items-start px-6 py-4 space-y-2 md:hidden z-50">
-            {navItems.map((item) => {
-              if (item.name === 'PHONE CASES') {
-                return (
-                  <div key={item.href} className="w-full">
-                    <button 
-                      onClick={togglePhoneCases}
-                      className="w-full py-2 border-b border-gray-700 flex justify-between items-center"
-                    >
-                      {item.name}
-                      <ChevronDownIcon className={`w-4 h-4 transition-transform ${phoneCasesOpen ? 'rotate-180' : ''}`} />
-                    </button>
-                    {phoneCasesOpen && (
-                      <div className="pl-4 py-2 space-y-2">
-                        {phoneCaseItems.map((subItem) => (
-                          <Link 
-                            key={subItem.href} 
-                            href={subItem.href} 
-                            className="block py-2 border-b border-gray-700"
-                            onClick={() => setMenuOpen(false)}
-                          >
-                            {subItem.name}
-                          </Link>
-                        ))}
-                      </div>
-                    )}
-                  </div>
-                );
-              }
+  <div className="absolute top-16 left-0 w-full bg-black text-white flex flex-col items-start px-6 py-4 space-y-2 md:hidden z-50">
 
-              return (
-                <Link 
-                  key={item.href} 
-                  href={item.href} 
-                  className="w-full py-2 border-b border-gray-700"
-                  onClick={() => setMenuOpen(false)}
-                >
-                  {item.name}
-                </Link>
-              );
-            })}
+    {/* 🔍 Mobile Search */}
+    <div className="w-full mb-4">
+      <div className="flex items-center space-x-2">
+        <MagnifyingGlassIcon className="h-5 w-5 text-white" />
+        <input
+          type="text"
+          placeholder="Search products..."
+          value={searchQuery}
+          onChange={(e) => setSearchQuery(e.target.value)}
+          onKeyDown={handleSearchKeyPress}
+          className="w-full bg-gray-700 text-white px-3 py-1 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400 text-sm"
+        />
+      </div>
+    </div>
+
+    {/* Mobile Navigation Items */}
+    {navItems.map((item) => {
+      if (item.name === 'PHONE CASES') {
+        return (
+          <div key={item.href} className="w-full">
+            <button 
+              onClick={togglePhoneCases}
+              className="w-full py-2 border-b border-gray-700 flex justify-between cursor-pointer items-center"
+            >
+              {item.name}
+              <ChevronDownIcon className={`w-4 h-4 transition-transform ${phoneCasesOpen ? 'rotate-180' : ''}`} />
+            </button>
+            {phoneCasesOpen && (
+              <div className="pl-4 py-2 space-y-2">
+                {phoneCaseItems.map((subItem) => (
+                  <Link 
+                    key={subItem.href} 
+                    href={subItem.href} 
+                    className="block py-2 border-b border-gray-700"
+                    onClick={() => setMenuOpen(false)}
+                  >
+                    {subItem.name}
+                  </Link>
+                ))}
+              </div>
+            )}
           </div>
-        )}
+        );
+      }
+
+      return (
+        <Link 
+          key={item.href} 
+          href={item.href} 
+          className="w-full py-2 border-b border-gray-700"
+          onClick={() => setMenuOpen(false)}
+        >
+          {item.name}
+        </Link>
+      );
+    })}
+  </div>
+)}
+
       </nav>
     </div>
   );

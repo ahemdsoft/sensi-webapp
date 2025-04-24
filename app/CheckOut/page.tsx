@@ -261,7 +261,7 @@ export default function CheckOut() {
                   >
                     <option value="cash">Cash on Delivery</option>
                 
-                    <option value="paypal">Mobile  Banking</option>
+                    
                   </select>
                 </div>
 
