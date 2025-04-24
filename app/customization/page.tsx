@@ -138,7 +138,7 @@ export default function Customization() {
         src="/back.png"
         alt="Overlay Frame"
         fill
-        className="object-cover z-10 pointer-events-none"
+        className="object-cover z-1 pointer-events-none"
       />
     </>
   ) : (
@@ -228,7 +228,7 @@ export default function Customization() {
             >
               {loading ? "Adding..." : "Add to Cart"}
             </Button>
-            <Button onClick={handleBuyNow} disabled={loading} className="w-full">
+            <Button onClick={handleBuyNow} disabled={loading} className="w-full hover:bg-blue-600">
               {loading ? "Processing..." : "Buy Now"}
             </Button>
           </div>

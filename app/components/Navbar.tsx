@@ -189,13 +189,13 @@ export default function Navbar() {
           <div key={item.href} className="w-full">
             <button 
               onClick={togglePhoneCases}
-              className="w-full py-2 border-b border-gray-700 flex justify-between cursor-pointer items-center"
+              className="w-full py-2 border-b border-gray-700 flex z-20 m-1 justify-between cursor-pointer items-center"
             >
               {item.name}
               <ChevronDownIcon className={`w-4 h-4 transition-transform ${phoneCasesOpen ? 'rotate-180' : ''}`} />
             </button>
             {phoneCasesOpen && (
-              <div className="pl-4 py-2 space-y-2">
+              <div className="pl-4 py-2 m-1 space-y-2">
                 {phoneCaseItems.map((subItem) => (
                   <Link 
                     key={subItem.href} 
