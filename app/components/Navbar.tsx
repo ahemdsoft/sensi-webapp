@@ -6,6 +6,7 @@ import Image from 'next/image';
 import axios from 'axios';
 import { MagnifyingGlassIcon, ChevronDownIcon } from '@heroicons/react/24/outline';
 import CartOption from './cartOptions';
+import FadeIn from './animation/fadein';
 const navItems = [
   { name: 'HOME', href: '/' },
   { name: 'PHONE CASES', href: '/phone-cases' },
@@ -182,6 +183,7 @@ export default function Navbar() {
       </div>
     </div>
 
+
     {/* Mobile Navigation Items */}
     {navItems.map((item) => {
       if (item.name === 'PHONE CASES') {
@@ -222,7 +224,11 @@ export default function Navbar() {
           {item.name}
         </Link>
       );
-    })}
+    })}<FadeIn delay={0.3}>
+    <div className="absolute top-16 left-0 w-full bg-black text-white flex flex-col items-start px-6 py-4 space-y-2 md:hidden z-50">
+      {/* mobile menu content here */}
+    </div>
+  </FadeIn>
   </div>
 )}
 

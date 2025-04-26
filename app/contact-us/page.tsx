@@ -1,3 +1,4 @@
+import FadeIn from "../components/animation/fadein";
 import ContactForm from "../components/ContactForm";
 import ContactInfo from "../components/contactinfo";
 
@@ -6,6 +7,7 @@ export default function ContactUsPage() {
  
 
   return (
+    <FadeIn delay={0.1}>
     <div className="h-full flex flex-col gap-6 items-center flex-wrap  bg-gray-50  py-12">
       <h1 className='text-3xl font-extrabold text-center font-poppins text-black'>Contact Us</h1>
       <p className='text-center font-poppins font-500 text-black'>Any question or remarks? Just write us a message!</p>
@@ -15,6 +17,6 @@ export default function ContactUsPage() {
     <ContactForm />
   </div>
 </div>
-   </div>
+   </div></FadeIn>
   );
 } 

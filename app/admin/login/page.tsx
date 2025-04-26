@@ -13,8 +13,8 @@ export default function AdminLogin() {
     e.preventDefault();
 
     if (
-      (username === 'admin' || process.env.NEXT_PUBLIC_ADMIN_USERNAME) &&
-      (password === 'admin123' || process.env.NEXT_PUBLIC_ADMIN_PASSWORD)
+      (username === process.env.NEXT_PUBLIC_ADMIN_USERNAME) &&
+      (password === process.env.NEXT_PUBLIC_ADMIN_PASSWORD)
     ) {
       localStorage.setItem('adminToken', 'dummy-token');
       router.push('/admin/dashboard');

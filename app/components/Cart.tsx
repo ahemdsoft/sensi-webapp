@@ -1,9 +1,11 @@
 'use client';
 import Image from 'next/image';
 import Link from 'next/link';
+import FadeInScroll from './animation/fadeinscrool';
 
 export default function CaseCard({ image, name, href }: { image: string; name: string; href: string }) {
   return (
+    <FadeInScroll delay={0.2}>
     <div className="w-[285px] h-[420px] overflow-hidden rounded-lg shadow-xl relative">
       <div className="w-full h-full group relative">
         <Image
@@ -24,6 +26,6 @@ export default function CaseCard({ image, name, href }: { image: string; name: s
           </Link>
         </div>
       </div>
-    </div>
+    </div></FadeInScroll>
   );
 }

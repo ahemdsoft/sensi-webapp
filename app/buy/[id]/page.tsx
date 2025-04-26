@@ -4,6 +4,7 @@ import Image from 'next/image';
 import { useState } from "react";
 import { useParams, useRouter } from 'next/navigation';
 import { useCart } from '@/app/context/CartContext';
+import  Fullslide  from '@/app/components/animation/fullslide';
 
 export default function BuyNowPage() {
   const { id } = useParams();
@@ -42,6 +43,7 @@ export default function BuyNowPage() {
   };
 
   return (
+    <Fullslide delay={0.1}>
     <div className="min-h-screen bg-gradient-to-br from-white via-purple-50 to-pink-100 flex flex-col items-center py-12 px-4">
       <div className="w-full max-w-6xl bg-white shadow-xl rounded-3xl overflow-hidden grid grid-cols-1 md:grid-cols-2 gap-8 p-8">
         
@@ -110,6 +112,6 @@ export default function BuyNowPage() {
         <h2 className="text-2xl font-semibold text-gray-800 mb-2">Product Details</h2>
         <p className="text-gray-600 leading-relaxed">{product.productdetails}</p>
       </div>
-    </div>
+    </div></Fullslide>
   );
 }

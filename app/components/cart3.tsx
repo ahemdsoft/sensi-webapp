@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { FiHeart, FiShoppingBag } from 'react-icons/fi';
 import { useParams } from 'next/navigation';
 import { useCart } from '../context/CartContext';
+import FadeInOnScroll from './animation/fadeinscrool';
 
 export default function CaseCard3({
   image,
@@ -41,7 +42,11 @@ export default function CaseCard3({
   };
 
   return (
+    <FadeInOnScroll delay={0.1}>
     <div className="group w-[337px] h-[500px] bg-white rounded-[10.5px] flex flex-col justify-between border-2 border-gray-200 shadow-2xl">
+      {/* Existing content here */}
+    
+    
       
       {/* Case Image */}
       <div className="flex justify-center items-center p-4">
@@ -104,6 +109,6 @@ export default function CaseCard3({
           onClick={handleAddToCart}
         />
       </div>
-    </div>
+    </div> </FadeInOnScroll>
   );
 }

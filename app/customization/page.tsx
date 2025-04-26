@@ -10,6 +10,7 @@ import Sameproduct from "@/app/components/sameproduct";
 import { useRouter } from "next/navigation";
 import { useCart } from "@/app/context/CartContext";
 import Image from "next/image";
+import FadeIn from "../components/animation/fadein";
 
 type BrandData = { [key: string]: string[] };
 
@@ -117,6 +118,7 @@ export default function Customization() {
   };
 
   return (
+    <FadeIn delay={0.1}>
     <div className="w-full py-10 px-4 flex flex-col items-center bg-gray-50">
       <div className="w-full max-w-6xl grid md:grid-cols-2 gap-8">
         {/* Preview Card */}
@@ -238,6 +240,6 @@ export default function Customization() {
       <div className="mt-10 w-full max-w-6xl">
         <Sameproduct />
       </div>
-    </div>
+    </div></FadeIn>
   );
 }

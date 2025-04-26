@@ -1,3 +1,5 @@
+import FadeIn from "../components/animation/fadein";
+
 export default function AboutUs() {
 
 
@@ -27,6 +29,7 @@ export default function AboutUs() {
    },
   ]
    return (
+    <FadeIn delay={0.1}>
      <div className="min-h-screen w-full flex text-inter justify-center  items-center py-12">
        {Conditions.map((item, index)=>(<div key={index} className="max-w-7xl w-[80%]  flex gap-6 flex-wrap    sm:px-6 lg:px-8">
            <h1  className="text-3xl font-inter text-[#009C9A] font-bold p-6">{item.title}</h1>
@@ -44,6 +47,6 @@ export default function AboutUs() {
 
            </div> ))}
        </div></div>))}
-     </div>
+     </div></FadeIn>
    );
  } 

@@ -3,6 +3,7 @@ import { useParams, useRouter } from 'next/navigation';
 import CaseCard3 from '@/app/components/cart3';
 import { useCart } from '@/app/context/CartContext';
 
+
 // Dummy JSON data
 const caseCategories = [
   {
@@ -35,6 +36,152 @@ const caseCategories = [
     mobile: 'redminote 9',
     brand: 'oppo',
     stock: 10,
+  },
+  {
+    id: 103,
+    name: '3D CASE',
+    image: '/Component 8.png',
+    price: 30.00,
+    discountPrice: 16.00,
+    mobile: 'redminote 9',
+    brand: 'oppo',
+    stock: 10,
+  }, {
+    id: 103,
+    name: '3D CASE',
+    image: '/Component 8.png',
+    price: 30.00,
+    discountPrice: 16.00,
+    mobile: 'redminote 9',
+    brand: 'oppo',
+    stock: 10,
+  }, {
+    id: 103,
+    name: '3D CASE',
+    image: '/Component 8.png',
+    price: 30.00,
+    discountPrice: 16.00,
+    mobile: 'redminote 9',
+    brand: 'oppo',
+    stock: 10,
+  }, {
+    id: 103,
+    name: '3D CASE',
+    image: '/Component 8.png',
+    price: 30.00,
+    discountPrice: 16.00,
+    mobile: 'redminote 9',
+    brand: 'oppo',
+    stock: 10,
+  }, {
+    id: 103,
+    name: '3D CASE',
+    image: '/Component 8.png',
+    price: 30.00,
+    discountPrice: 16.00,
+    mobile: 'redminote 9',
+    brand: 'oppo',
+    stock: 10,
+  },
+  {
+    id: 102,  // Another unique id
+    name: '3D CASE',
+    image: '/Component 7.png',
+    price: 30.00,
+    discountPrice: 16.00,
+    mobile: 'redminote 9',
+    stock: 10,
+    brand: 'realme'
+  }, {
+    id: 102,  // Another unique id
+    name: '3D CASE',
+    image: '/Component 7.png',
+    price: 30.00,
+    discountPrice: 16.00,
+    mobile: 'redminote 9',
+    stock: 10,
+    brand: 'realme'
+  }, {
+    id: 102,  // Another unique id
+    name: '3D CASE',
+    image: '/Component 7.png',
+    price: 30.00,
+    discountPrice: 16.00,
+    mobile: 'redminote 9',
+    stock: 10,
+    brand: 'realme'
+  }, {
+    id: 102,  // Another unique id
+    name: '3D CASE',
+    image: '/Component 7.png',
+    price: 30.00,
+    discountPrice: 16.00,
+    mobile: 'redminote 9',
+    stock: 10,
+    brand: 'realme'
+  }, {
+    id: 102,  // Another unique id
+    name: '3D CASE',
+    image: '/Component 7.png',
+    price: 30.00,
+    discountPrice: 16.00,
+    mobile: 'redminote 9',
+    stock: 10,
+    brand: 'realme'
+  }, {
+    id: 102,  // Another unique id
+    name: '3D CASE',
+    image: '/Component 7.png',
+    price: 30.00,
+    discountPrice: 16.00,
+    mobile: 'redminote 9',
+    stock: 10,
+    brand: 'realme'
+  }, {
+    id: 102,  // Another unique id
+    name: '3D CASE',
+    image: '/Component 7.png',
+    price: 30.00,
+    discountPrice: 16.00,
+    mobile: 'redminote 9',
+    stock: 10,
+    brand: 'realme'
+  }, {
+    id: 102,  // Another unique id
+    name: '3D CASE',
+    image: '/Component 7.png',
+    price: 30.00,
+    discountPrice: 16.00,
+    mobile: 'redminote 9',
+    stock: 10,
+    brand: 'realme'
+  }, {
+    id: 102,  // Another unique id
+    name: '3D CASE',
+    image: '/Component 7.png',
+    price: 30.00,
+    discountPrice: 16.00,
+    mobile: 'redminote 9',
+    stock: 10,
+    brand: 'realme'
+  }, {
+    id: 102,  // Another unique id
+    name: '3D CASE',
+    image: '/Component 7.png',
+    price: 30.00,
+    discountPrice: 16.00,
+    mobile: 'redminote 9',
+    stock: 10,
+    brand: 'realme'
+  }, {
+    id: 102,  // Another unique id
+    name: '3D CASE',
+    image: '/Component 7.png',
+    price: 30.00,
+    discountPrice: 16.00,
+    mobile: 'redminote 9',
+    stock: 10,
+    brand: 'realme'
   },
   // Add more cases as needed...
 ];
@@ -71,6 +218,7 @@ export default function DesignCollectionPage() {
   };
 
   return (
+    
     <div className="p-4 flex flex-col items-center justify-center min-h-screen bg-[#ffffff]">
       <div className="w-[90%] flex flex-col gap-11 justify-center items-center mb-5 mt-5 h-[100%]">
         <h1 className="text-6xl hover:shadow-[0px_4px_6px_#BF00FF78] font-bold md:w-[848px] md:h-[110] rounded-[15px] bg-[#3C1630] text-white w-full flex justify-center items-center">
