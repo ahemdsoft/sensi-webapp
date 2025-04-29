@@ -21,7 +21,7 @@ export default function Moreservise() {
   const imageVariants = {
     hidden: { y: 0 },
     visible: (index: number) => ({
-      y: [0, -30, 0],
+      y: [0, -45, 0],
       transition: {
         delay: index * 0.2,
         duration: 0.7,

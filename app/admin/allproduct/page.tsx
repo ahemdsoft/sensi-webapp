@@ -7,10 +7,13 @@ interface Product {
   name: string;
   price: number;
   image: string;
-  type: string;
+  catagory: string;
+  subcatagory: string;
+  notes: string;
   brand: string;
   mobile: string;
   stock: number;
+  discountprice: number;
 }
 
 // Dummy product data
@@ -20,30 +23,39 @@ const dummyProducts: Product[] = [
     name: 'iPhone 14 Pro',
     price: 145000,
     image: '/iphone.jpg',
-    type: 'Smartphone',
+    catagory: 'Smartphone',
+    subcatagory: 'Smartphone',
+    notes: 'Latest model with A16 chip',
     brand: 'Apple',
     mobile: 'A2890',
-    stock: 12
+    stock: 12,
+    discountprice: 120000
   },
   {
     id: 2,
     name: 'Samsung Galaxy S23',
     price: 120000,
     image: '/samsung.jpg',
-    type: 'Smartphone',
+    catagory: 'Smartphone',
+    subcatagory: 'Smartphone',
+    notes: 'Latest model with A16 chip',
     brand: 'Samsung',
     mobile: 'SM-S911B',
-    stock: 8
+    stock: 8,
+    discountprice: 120000
   },
   {
     id: 3,
     name: 'Redmi Note 12',
     price: 28000,
     image: '/redmi.jpg',
-    type: 'Smartphone',
+    catagory: 'Smartphone',
+    subcatagory: 'Smartphone',
+    notes: 'Latest model with A16 chip',
     brand: 'Xiaomi',
     mobile: '22111317I',
-    stock: 30
+    stock: 30,
+    discountprice: 120000
   }
 ];
 
@@ -121,9 +133,13 @@ export default function AllProductsPage() {
               <div className="text-lg font-semibold text-gray-800">{product.name}</div>
               <div className="text-sm text-gray-500">Brand: {product.brand}</div>
               <div className="text-sm text-gray-500">Model: {product.mobile}</div>
-              <div className="text-sm text-gray-500">Type: {product.type}</div>
+              <div className="text-sm text-gray-500">Catagory: {product.catagory}</div>
+              <div className="text-sm text-gray-500">Sub-catagory: {product.subcatagory}</div>
+              <div className="text-sm text-gray-500">Notes: {product.notes}</div>
               <div className="text-sm text-gray-500">Stock: {product.stock}</div>
-              <div className="text-md font-bold text-indigo-700">৳{product.price}</div>
+              <div className="text-md font-bold text-indigo-700">price:৳{product.price}</div>
+              <div className="text-md font-bold text-indigo-700">discout-price:৳{product.discountprice}</div>
+              
               <button
                 onClick={() => handleDelete(product.id)}
                 className="mt-auto bg-red-500 hover:bg-red-600 text-white py-2 rounded-lg"

@@ -124,7 +124,7 @@ export default function Customization() {
         {/* Preview Card */}
         <Card className="h-full">
           <CardContent className="flex justify-center items-center h-full p-6">
-          <div className="relative border border-black w-40 h-80 rounded-4xl overflow-hidden">
+          <div className="relative border border-[#702f01] w-40 h-80 rounded-4xl overflow-hidden">
   {imagePreview ? (
     <>
       {/* User Image - bottom layer */}

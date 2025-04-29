@@ -45,7 +45,7 @@ export default function BuyNowPage() {
   return (
     <Fullslide delay={0.1}>
     <div className="min-h-screen bg-gradient-to-br from-white via-purple-50 to-pink-100 flex flex-col items-center py-12 px-4">
-      <div className="w-full max-w-6xl bg-white shadow-xl rounded-3xl overflow-hidden grid grid-cols-1 md:grid-cols-2 gap-8 p-8">
+      <div className="w-full max-w-6xl bg-white shadow-xl rounded-3xl overflow-hidden grid grid-cols-1 md:grid-cols-2 gap-8 p-6">
         
         {/* Product Image */}
         <div className="relative w-full aspect-square rounded-xl overflow-hidden border">
@@ -95,7 +95,7 @@ export default function BuyNowPage() {
           {/* Buy Now */}
           <button
             onClick={handleBuyNow}
-            className="w-full bg-gradient-to-r from-pink-600 to-purple-600 hover:from-pink-700 hover:to-purple-700 text-white py-3 rounded-full text-lg font-semibold shadow-md transition duration-300"
+            className="w-full bg-[#3C1630] cursor-pointer hover:shadow-[0_4px_6px_#BF00FFA3] text-white py-3 rounded-full text-lg font-semibold shadow-md transition duration-300"
           >
             Buy Now
           </button>

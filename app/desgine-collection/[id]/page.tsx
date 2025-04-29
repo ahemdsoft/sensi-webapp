@@ -9,7 +9,7 @@ const caseCategories = [
   {
     id: 101,  // Added unique id for each product
     name: '3D CASE',
-    image: '/Component 6.png',
+    image: '/cas.png',
     price: 20.00,
     discountPrice: 15.00,
     mobile: 'redminote 9',
@@ -224,11 +224,11 @@ export default function DesignCollectionPage() {
         <h1 className="text-6xl hover:shadow-[0px_4px_6px_#BF00FF78] font-bold md:w-[848px] md:h-[110] rounded-[15px] bg-[#3C1630] text-white w-full flex justify-center items-center">
           {id}  Cases
         </h1>
-        <h2 className="sm:text-4xl hover:shadow-[0px_4px_6px_#00D6EE40] text-white font-semibold md:w-[1143px] md:h-[68px] bg-[#3C1630] flex justify-center items-center w-full top-[221.25px] rounded-[15.75px]">
+        <h2 className="sm:text-4xl hover:shadow-[0px_4px_6px_#00D6EE40] text-white font-semibold md:w-[1143px] md:h-[68px] bg-[#3C1630] flex justify-center md:items-center flex-wrap items-center w-full top-[221.25px] rounded-[15.75px]">
           96% COLOUR ACCURACY, GRAPHENE METAL, RUBBER GRIP
         </h2>
 
-        <div className="flex flex-wrap justify-center gap-24">
+        <div className="flex flex-wrap justify-center gap-36">
           {caseCategories.map((item, index) => {
             const href = `/buy/${(item.id)}`;
 

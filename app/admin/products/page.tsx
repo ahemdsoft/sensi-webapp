@@ -2,16 +2,21 @@
 import { useState } from 'react';
 import Image from 'next/image';
 
+
 export default function ProductsPage() {
   const [formData, setFormData] = useState({
     name: '',
     price: '',
+      discountprice:'',
     image: '',
-    type: '',
+    catagory: '',
+    subcatagory: '',
     brand: '',
     mobile: '',
     stock: '',
-    id: ''
+    id: '',
+    notes: ''
+  
   });
 
   const [imagePreview, setImagePreview] = useState<string | null>(null);
@@ -55,11 +60,15 @@ export default function ProductsPage() {
           id: '',
           name: '',
           price: '',
+          discountprice:'',
           image: '',
-          type: '',
+          catagory: '',
+          subcatagory: '',
+          notes: '',
           brand: '',
           mobile: '',
           stock: ''
+          
         });
         setImagePreview(null);
       } else {
@@ -107,6 +116,18 @@ export default function ProductsPage() {
               className="mt-1 block w-full rounded-md border-gray-300 p-2 shadow-sm"
             />
           </div>
+          <div>
+            <label htmlFor="price" className="block text-sm font-medium text-gray-700">Discount-Price</label>
+            <input
+              type="number"
+              name="discountprice"
+              id="discountprice"
+              value={formData.discountprice}
+              onChange={handleChange}
+              required
+              className="mt-1 block w-full rounded-md border-gray-300 p-2 shadow-sm"
+            />
+          </div>
 
           {/* Brand */}
           <div>
@@ -138,14 +159,43 @@ export default function ProductsPage() {
 
           {/* Type */}
           <div>
-            <label htmlFor="type" className="block text-sm font-medium text-gray-700">Type</label>
+            <label htmlFor="type" className="block text-sm font-medium text-gray-700">Catagory</label>
             <input
               type="text"
-              name="type"
+              name="catagory"
               id="type"
-              value={formData.type}
+              value={formData.catagory}
               onChange={handleChange}
               required
+              className="mt-1 block w-full rounded-md border-gray-300 p-2 shadow-sm"
+            />
+          </div>
+            
+            {/* Subcatagory */} 
+            <div>
+            <label htmlFor="type" className="block text-sm font-medium text-gray-700">Sub-Catagory</label>
+            <input
+              type="text"
+              name="subcatagory"
+              id="type"
+              value={formData.subcatagory}
+              onChange={handleChange}
+          
+              className="mt-1 block w-full rounded-md border-gray-300 p-2 shadow-sm"
+            />
+          </div>
+            
+              
+            {/* Notes */} 
+            <div>
+            <label htmlFor="type" className="block text-sm font-medium text-gray-700">Notes</label>
+            <input
+              type="text"
+              name="notes"
+              id="type"
+              value={formData.notes}
+              onChange={handleChange}
+              
               className="mt-1 block w-full rounded-md border-gray-300 p-2 shadow-sm"
             />
           </div>

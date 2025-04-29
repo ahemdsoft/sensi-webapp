@@ -12,7 +12,7 @@ export default function FadeInOnScroll({
 }) {
   const { ref, inView } = useInView({
     triggerOnce: false, // ❗ Allow re-triggering on re-entry
-    threshold: 0.1    , // Adjust this as needed
+    threshold: 0.2    , // Adjust this as needed
   });
 
   return (
@@ -20,8 +20,8 @@ export default function FadeInOnScroll({
       ref={ref}
       key={inView.toString()} // ❗ Change key to re-trigger animation
       initial={{ opacity: 0, x: 0 }}
-      animate={inView ? { opacity: 1, x: -0 } : { opacity: 0, x: 0 }}
-      transition={{ duration: 0.2, delay }}
+      animate={inView ? { opacity: 1, x: 0 } : { opacity: 0, x: 0 }}
+      transition={{ duration: 0.5, delay }}
     >
       {children}
     </motion.div>
